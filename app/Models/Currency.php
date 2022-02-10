@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Screen extends Model
+class Currency extends Model
 {
     use HasFactory, SoftDeletes, GeneralHelperTrait;
 
@@ -17,10 +17,10 @@ class Screen extends Model
      * @var array
      */
     protected $fillable = [
+        'uuid',
         'name',
-        'created_by',
-        'updated_by',
-        'deleted_by',
+        'code',
+        'symbol',
     ];
 
     /**
@@ -39,6 +39,15 @@ class Screen extends Model
         self::creating(function ($model) {
             $model->uuid = (string) \Webpatser\Uuid\Uuid::generate(config('vars.uuid_version'));
         });
+    }
+
+
+    /**
+     *  Change Route Key Name
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
     }
 
     /**
@@ -66,14 +75,6 @@ class Screen extends Model
     }
 
     /**
-     *  Get a specific resource
-     */
-    public static function getBy($by, $resource)
-    {
-        return self::where($by, $resource)->first();
-    }
-
-    /**
      *  Get all resource rows
      */
     public static function getAll()
@@ -81,9 +82,6 @@ class Screen extends Model
         return self::all();
     }
 
-    /**
-     *  Get a specific resource
-     */
     public static function getOneBy($parameters = [])
     {
         $model = new self();
@@ -123,13 +121,5 @@ class Screen extends Model
     public function deletedBy()
     {
         return $this->belongsTo(User::class, 'deleted_by');
-    }
-
-    /**
-     *  Relationship with Permission groups
-     */
-    public function actions()
-    {
-        return $this->belongsToMany(Action::class, 'screen_action')->withTimestamps();
     }
 }

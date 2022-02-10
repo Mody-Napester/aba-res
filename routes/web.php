@@ -11,6 +11,15 @@ use \App\Http\Controllers\ScreenController;
 use \App\Http\Controllers\GroupController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\LookupController;
+use \App\Http\Controllers\MediaController;
+use \App\Http\Controllers\InstructorController;
+use \App\Http\Controllers\CourseController;
+use \App\Http\Controllers\SessionController;
+use \App\Http\Controllers\LessonController;
+use \App\Http\Controllers\StudentController;
+use \App\Http\Controllers\BookController;
+use \App\Http\Controllers\SocialController;
+use \App\Http\Controllers\TestimonialController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -36,6 +45,17 @@ Route::group([
     Route::resource('screen',ScreenController::class);
     Route::resource('group',GroupController::class);
     Route::resource('user',UserController::class);
+
+    Route::resource('media',MediaController::class);
+    Route::resource('instructor',InstructorController::class);
+    Route::resource('course',CourseController::class);
+    Route::resource('session',SessionController::class);
+    Route::resource('lesson',LessonController::class);
+    Route::resource('student',StudentController::class);
+    Route::resource('book',BookController::class);
+
+    Route::resource('social',SocialController::class);
+    Route::resource('testimonial',TestimonialController::class);
 
     Route::resource('lookup',LookupController::class);
 

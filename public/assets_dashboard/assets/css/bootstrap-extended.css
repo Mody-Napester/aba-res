@@ -1221,7 +1221,7 @@ input[type=number]::-webkit-outer-spin-button {
 .header-navbar.fixed-top {
   left: 260px;
   position: fixed;
-  background-color: #F2F4F4;
+  background-color: #f2e096;
 }
 
 .header-navbar[class*="bg-"] .navbar-nav .nav-item > a {

@@ -2,23 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Repositories\InstructorRepositoryController;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 
 class InstructorController extends Controller{
+
+    public $repository;
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function __construct()
+    {
+        $this->repository = new InstructorRepositoryController();
+    }
 
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        if(!check_authority('list.instructor')){
-            toastr()->error(trans('messages.you_dont_have_permissions'));
-            return redirect('/');
+        $data = $this->repository->index();
+        if($data['status']['success'] == false && $data['status']['reason'] == 'permission_failed'){
+            toastr()->error($data['status']['message']);
+            return permission_redirect();
+        }else{
+            return view('@dashboard.instructor.index', $data);
         }
-
-        $data['resources'] = Instructor::all();
-        return view('@dashboard.instructor.index', $data);
     }
 
     /**
@@ -32,12 +43,44 @@ class InstructorController extends Controller{
         }
 
         // Check validation
-        $request->validate([
-            'name' => 'required|string|unique:instructors',
-        ]);
+        $rules = [
+            'phone' => 'required',
+            'email' => 'required',
+            'avatar' => 'required',
+        ];
+
+        foreach (langs("short_name") as $lang) {
+            $rules['name_' . $lang] = 'required|string';
+            $rules['speciality_' . $lang] = 'required|string';
+            $rules['details_' . $lang] = 'required|string';
+        }
+
+        $request->validate($rules);
+
+        // Code
+        $name = [];
+        $speciality = [];
+        $details = [];
+
+        foreach (langs("short_name") as $lang) {
+            $name[$lang] = $request->input('name_' . $lang);
+            $speciality[$lang] = $request->input('speciality_' . $lang);
+            $details[$lang] = $request->input('details_' . $lang);
+        }
+
+        // Solve Arabic Problem
+        $name_json = str_replace(json_encode($name['ar']), '"'.$name['ar'].'"',json_encode($name));
+        $speciality_json = str_replace(json_encode($speciality['ar']), '"'.$speciality['ar'].'"',json_encode($speciality));
+        $details_json = str_replace(json_encode($details['ar']), '"'.$details['ar'].'"',json_encode($details));
 
         $fields = [
-            'name' => ($request->has("name")) ? $request->name : '',
+            'name' => ($request->has("name")) ? $name_json : '',
+            'speciality' => ($request->has("speciality")) ? $speciality_json : '',
+            'details' => ($request->has("details")) ? $details_json : '',
+            'phone' => ($request->has("phone")) ? $request->phone : '',
+            'email' => ($request->has("email")) ? $request->email : '',
+            'avatar' => ($request->has("avatar")) ? $request->avatar : '',
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
             'created_by' => auth()->user()->id,
         ];
 

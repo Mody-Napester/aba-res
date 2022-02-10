@@ -65,39 +65,58 @@
     @if(check_authority('use.work_flow'))
         <li class="navigation-header text-truncate"><span data-i18n="Apps">{{ trans('sidebar.Work_Flow') }}</span></li>
 
-        <li class="nav-item">
-            <a href=""><i class="bx bxs-file-plus"></i><span class="menu-title text-truncate" data-i18n="Media">{{ trans('sidebar.Media_center') }}</span></a>
-        </li>
+        @if(check_authority('list.media'))
+            <li class="@if(Route::currentRouteName() == 'media.index') active @endif nav-item">
+                <a href="{{ route('media.index') }}"><i class="bx bxs-file-plus"></i><span class="menu-title text-truncate" data-i18n="Media">{{ trans('sidebar.Media_center') }}</span></a>
+            </li>
+        @endif
+
+        @if(check_authority('list.currency'))
+            <li class="nav-item">
+{{--                <a href="{{ route('currency.index') }}"><i class="bx bx-money"></i><span class="menu-title text-truncate" data-i18n="Currencies">{{ trans('sidebar.Currencies') }}</span></a>--}}
+                <a href=""><i class="bx bx-money"></i><span class="menu-title text-truncate" data-i18n="Currencies">{{ trans('sidebar.Currencies') }}</span></a>
+            </li>
+        @endif
 
         <li class="nav-item">
-            <a href="#"><i class="bx bx-check-shield"></i><span class="menu-title text-truncate" data-i18n="Permissions">{{ trans('sidebar.Course_Flow') }}</span></a>
+            <a href="#"><i class="bx bx-check-shield"></i><span class="menu-title text-truncate" data-i18n="Course Flow">{{ trans('sidebar.Course_Flow') }}</span></a>
             <ul class="menu-content">
-                <li>
-                    <a class="d-flex align-items-center" href=""><i class="bx bx-briefcase"></i><span class="menu-title text-truncate" data-i18n="Instructor">{{ trans('sidebar.Instructor') }}</span></a>
-                </li>
-                <li>
-                    <a class="d-flex align-items-center" href=""><i class="bx bx-chalkboard"></i><span class="menu-title text-truncate" data-i18n="Courses">{{ trans('sidebar.Courses') }}</span></a>
-                </li>
-                <li>
-                    <a class="d-flex align-items-center" href=""><i class="bx bx-tag"></i><span class="menu-title text-truncate" data-i18n="Sessions">{{ trans('sidebar.Sessions') }}</span></a>
-                </li>
-                <li>
-                    <a class="d-flex align-items-center" href=""><i class="bx bx-task"></i><span class="menu-title text-truncate" data-i18n="Lessons">{{ trans('sidebar.Lessons') }}</span></a>
-                </li>
-                <li>
-                    <a class="d-flex align-items-center" href=""><i class="bx bx-user-pin"></i><span class="menu-title text-truncate" data-i18n="Students">{{ trans('sidebar.Students') }}</span></a>
-                </li>
+                @if(check_authority('list.instructor'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('instructor.index') }}"><i class="bx bx-briefcase"></i><span class="menu-title text-truncate" data-i18n="Instructors">{{ trans('sidebar.Instructors') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.course'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('course.index') }}"><i class="bx bx-chalkboard"></i><span class="menu-title text-truncate" data-i18n="Courses">{{ trans('sidebar.Courses') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.session'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('session.index') }}"><i class="bx bx-tag"></i><span class="menu-title text-truncate" data-i18n="Sessions">{{ trans('sidebar.Sessions') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.lesson'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('lesson.index') }}"><i class="bx bx-task"></i><span class="menu-title text-truncate" data-i18n="Lessons">{{ trans('sidebar.Lessons') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.student'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('student.index') }}"><i class="bx bx-user-pin"></i><span class="menu-title text-truncate" data-i18n="Students">{{ trans('sidebar.Students') }}</span></a>
+                    </li>
+                @endif
             </ul>
         </li>
 
         <li class="nav-item">
-            <a href=""><i class="bx bx-book"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Books') }}</span></a>
+            <a href="{{ route('book.index') }}"><i class="bx bx-book"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Books') }}</span></a>
         </li>
         <li class="nav-item">
-            <a href=""><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Socials">{{ trans('sidebar.Social_Accounts') }}</span></a>
+            <a href="{{ route('social.index') }}"><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Socials">{{ trans('sidebar.Social_Accounts') }}</span></a>
         </li>
         <li class="nav-item">
-            <a href=""><i class="bx bx-chat"></i><span class="menu-title text-truncate" data-i18n="Testimonials">{{ trans('sidebar.Testimonials') }}</span></a>
+            <a href="{{ route('testimonial.index') }}"><i class="bx bx-chat"></i><span class="menu-title text-truncate" data-i18n="Testimonials">{{ trans('sidebar.Testimonials') }}</span></a>
         </li>
 
         @if(check_authority('list.translations'))

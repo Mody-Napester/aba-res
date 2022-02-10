@@ -5,6 +5,31 @@ function getFromJson($json , $lang){
     return (isset($data[$lang])) ? $data[$lang] : '';
 }
 
+function getTrans($json, $lang)
+{
+    if (!empty($json)) {
+        $data = json_decode($json, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $data[$lang];
+        }else{
+            return $json;
+        }
+    } else {
+        return '-';
+    }
+}
+
+// Get Empty Json
+function getEmptyJson()
+{
+    $return = '';
+    foreach (lookups('languages') as $language){
+        $return .= '"'. $language->name .'":"",';
+    }
+//    return '{' . $return . '}';
+    return '{"ar":"","en":""}';
+}
+
 // Get path
 function get_path($path){
     return base_path() . config('vars.public') . '/' . $path;
@@ -18,6 +43,11 @@ function check_authority($authority){
 // Default language
 function lang(){
     return app()->getLocale();
+}
+
+// Permission Redirect;
+function permission_redirect(){
+    return redirect('/');
 }
 
 // System languages

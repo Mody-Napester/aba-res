@@ -40,6 +40,15 @@ class Action extends Model
         });
     }
 
+
+    /**
+     *  Change Route Key Name
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
+
     /**
      *  Create new resource
      */
