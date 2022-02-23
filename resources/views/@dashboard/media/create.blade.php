@@ -41,7 +41,7 @@
                                 <select class="select2 form-control @error('media_type_lookup_uuid') is-invalid @enderror" name="media_type_lookup_uuid" id="media_type_lookup_uuid">
                                     <option value="choose">{{ trans('general.choose') }}</option>
                                     @foreach($media_types as $media_type)
-                                        <option value="{{$media_type->uuid}}">{{ $media_type->name }}</option>
+                                        <option value="{{$media_type->uuid}}">{{ getTrans($media_type->display_name, lang()) }}</option>
                                     @endforeach
                                 </select>
 

@@ -10,7 +10,7 @@ use \App\Http\Controllers\ActionController;
 use \App\Http\Controllers\ScreenController;
 use \App\Http\Controllers\GroupController;
 use \App\Http\Controllers\UserController;
-use \App\Http\Controllers\LookupController;
+use \App\Http\Controllers\Monolithic\LookupController;
 use \App\Http\Controllers\Monolithic\MediaController;
 use \App\Http\Controllers\Monolithic\InstructorController;
 use \App\Http\Controllers\Monolithic\CourseController;
@@ -50,7 +50,7 @@ Route::group([
     Route::resource('screen',ScreenController::class);
     Route::resource('group',GroupController::class);
     Route::resource('user',UserController::class);
-
+    Route::resource('lookup',LookupController::class);
     Route::resource('currency',CurrencyController::class);
     Route::resource('media',MediaController::class);
     Route::resource('instructor',InstructorController::class);
@@ -70,6 +70,6 @@ Route::group([
 
     // orders
     Route::resource('order',OrderController::class);
-    Route::resource('lookup',LookupController::class);
+
 
 });

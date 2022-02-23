@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\GeneralHelperTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Lookup extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, GeneralHelperTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -81,6 +82,31 @@ class Lookup extends Model
     }
 
     /**
+     *  Get all resource rows
+     */
+    public static function getAll()
+    {
+        return self::all();
+    }
+
+    public static function getOneBy($parameters = [])
+    {
+        $model = new self();
+        $result = $model->getFromModelByParameters($model, $parameters);
+        return $result->first();
+    }
+
+    /**
+     *  Get all resource
+     */
+    public static function getAllBy($parameters = [])
+    {
+        $model = new self();
+        $result = $model->getFromModelByParameters($model, $parameters);
+        return $result->get();
+    }
+
+    /**
      *  Relationship with users
      */
     public function createdBy()
@@ -102,6 +128,30 @@ class Lookup extends Model
     public function deletedBy()
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    /**
+     *  Relationship with lookups (parent)
+     */
+    public function parent()
+    {
+        return $this->belongsTo(Lookup::class, 'parent_id', 'id');
+    }
+
+    /**
+     *  Relationship with lookups (related)
+     */
+    public function related()
+    {
+        return $this->belongsTo(Lookup::class, 'related_id', 'id');
+    }
+
+    /**
+     *  Relationship with media (media_image)
+     */
+    public function media_image()
+    {
+        return $this->belongsTo(Media::class, 'media_image_id', 'id');
     }
 
 }

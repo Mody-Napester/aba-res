@@ -20,9 +20,11 @@ class Book extends Model
         'uuid',
 
         'name',
+        'price',
         'media_cover_id',
-        'media_image_id',
+        'media_book_id',
         'details',
+        'is_free',
         'is_published',
 
         'created_by',
@@ -127,5 +129,21 @@ class Book extends Model
     public function deletedBy()
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    /**
+     *  Relationship with media_cover
+     */
+    public function media_cover()
+    {
+        return $this->belongsTo(Media::class, 'media_cover_id', 'id');
+    }
+
+    /**
+     *  Relationship with media_image
+     */
+    public function media_book()
+    {
+        return $this->belongsTo(Media::class, 'media_book_id', 'id');
     }
 }

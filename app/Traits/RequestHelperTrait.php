@@ -24,6 +24,8 @@ trait RequestHelperTrait {
                         if($parent){
                             $resources = $resources->where('parent_id', $parent->id);
                         }
+                    }else{
+                        $resources = $resources->where($input, $operation, $request->input($input));
                     }
                 }
             }

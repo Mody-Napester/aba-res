@@ -32,6 +32,7 @@ class LookupRepositoryController extends Controller
         // Get All Resource
         $data_request = $this->get_data(new Lookup(), $request, [
             "name" => "like",
+            "parent_id" => "=",
         ]);
 
         $data = $this->general_response($this->success_list_message(), LookupResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);
@@ -66,25 +67,51 @@ class LookupRepositoryController extends Controller
             return $this->general_response($this->fail_permission_message());
         }
 
+        // Check in name already taken
+        if(Lookup::getBy('name', $request->name)){
+            return $this->general_response($this->fail_general_message(trans('messages.already_exists')));
+        }
+
         // Check Media Image
-        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
-        if(!$avatar){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
+        $media_image_id = null;
+        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
+        if($media_image){$media_image_id = $media_image->id;}
+
+        // Check Parent
+        $parent_id = 0;
+        if($request->has('parent') && $request->parent != 0){
+            $parent = Lookup::where('uuid', $request->parent)->first();
+            if(!$parent){
+                return $this->general_response($this->fail_general_message(trans('messages.parent_not_exists')));
+            }
+            $parent_id = $parent->id;
+        }
+
+        // Check Related
+        $related_id = 0;
+        if($request->has('related') && $request->related != 0){
+            $related = Lookup::where('uuid', $request->related)->first();
+            if(!$related){
+                return $this->general_response($this->fail_general_message(trans('messages.related_not_exists')));
+            }
+            $related_id = $related->id;
         }
 
         // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'speciality', 'details'
+            'name', 'display_name', 'details'
         ]);
 
         $fields = [
-            'name' => $attributes_trans['name']['json'],
-            'speciality' => $attributes_trans['speciality']['json'],
+            'key' => ($request->has("name")) ? $request->name : '',
+            'parent_id' => $parent_id,
+            'related_id' => $related_id,
+            'media_image_id' => $media_image_id,
+            'name' => ($request->has("name")) ? $request->name : '',
+            'display_name' => $attributes_trans['display_name']['json'],
             'details' => $attributes_trans['details']['json'],
-            'phone' => ($request->has("phone")) ? $request->phone : '',
-            'email' => ($request->has("email")) ? $request->email : '',
-            'avatar' => $avatar->id,
             'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
+            'ordering' => ($request->has("ordering")) ? $request->ordering : null,
             'created_by' => getCurrentUserId(),
         ];
 
@@ -140,24 +167,50 @@ class LookupRepositoryController extends Controller
             return $this->general_response($this->fail_resource_not_found_message());
         }
 
-        // Check Media Image
-        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
-        if(!$avatar){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
+        // Check in name already taken
+        if(Lookup::where('name', $request->name)->where('id', '<>',$resource->id)->first()){
+            return $this->general_response($this->fail_general_message(trans('messages.already_exists')));
         }
 
+        // Check Media Image
+        $media_image_id = null;
+        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
+        if($media_image){$media_image_id = $media_image->id;}
+
+        // Check Parent
+        $parent_id = 0;
+        if($request->has('parent') && $request->parent != 0){
+            $parent = Lookup::where('uuid', $request->parent)->first();
+            if(!$parent){
+                return $this->general_response($this->fail_general_message(trans('messages.parent_not_exists')));
+            }
+            $parent_id = $parent->id;
+        }
+
+        // Check Related
+        $related_id = 0;
+        if($request->has('related') && $request->related != 0){
+            $related = Lookup::where('uuid', $request->related)->first();
+            if(!$related){
+                return $this->general_response($this->fail_general_message(trans('messages.related_not_exists')));
+            }
+            $related_id = $related->id;
+        }
+
+        // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'speciality', 'details'
+            'name', 'display_name', 'details'
         ]);
 
         $fields = [
-            'name' => ($attributes_trans['name']['json']) ? $attributes_trans['name']['json'] : $resource->name,
-            'speciality' => ($attributes_trans['speciality']['json']) ? $attributes_trans['speciality']['json'] : $resource->speciality,
+            'parent_id' => $parent_id,
+            'related_id' => $related_id,
+            'media_image_id' => $media_image_id,
+//            'name' => ($request->has("name")) ? $request->name : $resource->name,
+            'display_name' => ($attributes_trans['display_name']['json']) ? $attributes_trans['display_name']['json'] : $resource->display_name,
             'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
-            'phone' => ($request->has("phone")) ? $request->phone : $resource->phone,
-            'email' => ($request->has("email")) ? $request->email : $resource->email,
-            'avatar' => ($avatar) ? $avatar->id : $resource->avatar,
-            'is_active' => ($request->has("is_active") && in_array($request->is_active, [0,1])) ? $request->is_active : $resource->is_active,
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
+            'ordering' => ($request->has("ordering")) ? $request->ordering : $resource->ordering,
             'updated_by' => getCurrentUserId(),
         ];
 

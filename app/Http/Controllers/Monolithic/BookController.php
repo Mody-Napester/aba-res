@@ -45,7 +45,7 @@ class BookController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resource'] = $return_data['data']['items'];
-            $data['medias'] = $this->media->index(null)['data']['items'];
+            $data['medias'] = $this->media->index(new Request(['is_active' => '1']))['data']['items'];
             return view('@dashboard.book.create', $data);
         }
     }

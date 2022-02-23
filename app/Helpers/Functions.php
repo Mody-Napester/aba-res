@@ -1,11 +1,5 @@
 <?php
 
-// Old Json Trans
-function getFromJson($json , $lang){
-    $data = json_decode($json, true);
-    return (isset($data[$lang])) ? $data[$lang] : '';
-}
-
 //  Json Trans
 function getTrans($json, $lang)
 {
@@ -54,17 +48,18 @@ function lang(){
 
 // System languages
 function langs($get = null){
-    $get_array = [];
-    if($get == null){
-        $get_array = config('vars.langs');
-    }else{
-        foreach (config('vars.langs') as $lang) {
-            if($get == 'short_name'){
-                $get_array[] = $lang['short_name'];
-            }
+    $languages = [];
+
+    foreach (lookups('languages') as $language){
+        if(is_null($get)){
+            $languages[] = $language->name;
+        }
+        elseif ($get == 'display_name'){
+            $languages[] = getTrans($language->display_name, lang());
         }
     }
-    return $get_array;
+
+    return $languages;
 }
 
 // get user id
@@ -80,7 +75,7 @@ function getCurrentUserId(){
 function setAttributesTrans($attributes = []){
     $data = [];
     foreach ($attributes as $attribute){
-        foreach (langs("short_name") as $lang) {
+        foreach (langs() as $lang) {
             $data[$attribute][$lang] = request()->input($attribute . '_' . $lang);
         }
 

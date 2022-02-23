@@ -46,12 +46,12 @@
                                     <th>#</th>
                                     <th>{{ trans('general.control') }}</th>
                                     <th>{{ trans('book.name') }}</th>
-                                    <th>{{ trans('book.speciality') }}</th>
+                                    <th>{{ trans('book.price') }}</th>
                                     <th>{{ trans('book.details') }}</th>
-                                    <th>{{ trans('book.phone') }}</th>
-                                    <th>{{ trans('book.email') }}</th>
-                                    <th>{{ trans('book.avatar') }}</th>
-                                    <th>{{ trans('book.is_active') }}</th>
+                                    <th>{{ trans('book.cover') }}</th>
+                                    <th>{{ trans('book.image') }}</th>
+                                    <th>{{ trans('book.is_free') }}</th>
+                                    <th>{{ trans('book.is_published') }}</th>
                                     <th>{{ trans('book.created_by') }}</th>
                                     <th>{{ trans('book.updated_by') }}</th>
                                     <th>{{ trans('book.created_at') }}</th>
@@ -77,13 +77,31 @@
                                                 </div>
                                             </td>
                                             <td>{{ getTrans($resource->name, lang()) }}</td>
-                                            <td>{{ getTrans($resource->speciality, lang()) }}</td>
+                                            <td>{{ $resource->price }}</td>
                                             <td>{!! getTrans($resource->details, lang()) !!}</td>
-                                            <td>{{ $resource->phone }}</td>
-                                            <td>{{ $resource->email }}</td>
-                                            <td>{{ $resource->avatar }}</td>
                                             <td>
-                                                @if($resource->is_active == 1)
+                                                @if($resource->media_cover)
+                                                    <img src="{{ url('assets_public/files/image') . '/' . $resource->media_cover->file_name }}" alt="image" class="img-thumbnail">
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($resource->media_book)
+                                                    <a href="{{ url('assets_public/files/book') . '/' . $resource->media_book->file_name }}"><i class="bx bx-download"></i></a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($resource->is_free == 1)
+                                                    <span class="badge badge-light-success">Yes</span>
+                                                @else
+                                                    <span class="badge badge-light-danger">No</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($resource->is_published == 1)
                                                     <span class="badge badge-light-success">Yes</span>
                                                 @else
                                                     <span class="badge badge-light-danger">No</span>

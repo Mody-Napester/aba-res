@@ -1,6 +1,6 @@
 @extends('@dashboard._layouts.master')
 
-@section('title') {{ trans('general.edit') }} {{ getTrans($resource->name, lang()) }} @endsection
+@section('title') {{ trans('general.edit') }} {{ trans('general.file') }} ({{ $resource->file_name }}) @endsection
 
 @section('post_head')
     <script src="{{ url('assets_dashboard/assets-custom/ckeditor/ckeditor.js') }}"></script>
@@ -21,7 +21,7 @@
                 <div class="breadcrumb-wrapper d-none d-sm-block">
                     <ol class="breadcrumb p-0 mb-0 pl-1">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item active">{{ getTrans($resource->name, lang()) }}</li>
+                        <li class="breadcrumb-item active">{{ trans('general.file') }} ({{ $resource->file_name }})</li>
                     </ol>
                 </div>
             </div>
@@ -32,7 +32,7 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title"><b>{{ trans('general.edit') }} {{ getTrans($resource->name, lang()) }}</b></h4>
+                <h4 class="card-title"><b>{{ trans('general.edit') }} {{ trans('general.file') }} ({{ $resource->file_name }})</b></h4>
             </div>
             <div class="card-body">
                 <form action="{{ route('media.update', [$resource->uuid]) }}" method="post">
@@ -47,7 +47,7 @@
                                 <select class="select2 form-control @error('media_type_lookup_uuid') is-invalid @enderror" name="media_type_lookup_uuid" id="media_type_lookup_uuid">
                                     <option value="choose">{{ trans('general.choose') }}</option>
                                     @foreach($media_types as $media_type)
-                                        <option @if($resource->media_type_lookup_id == $media_type->id) selected @endif value="{{$media_type->uuid}}">{{ $media_type->name }}</option>
+                                        <option @if($resource->media_type_lookup_id == $media_type->id) selected @endif value="{{$media_type->uuid}}">{{ getTrans($media_type->display_name, lang()) }}</option>
                                     @endforeach
                                 </select>
 

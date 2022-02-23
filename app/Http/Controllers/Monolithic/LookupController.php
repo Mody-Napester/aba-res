@@ -48,6 +48,8 @@ class LookupController extends Controller {
         }else{
             $data['resource'] = $return_data['data']['items'];
             $data['medias'] = $this->media->index(null)['data']['items'];
+            $data['parents'] = $this->repository->index(null)['data']['items'];
+            $data['relateds'] = $this->repository->index(null)['data']['items'];
             return view('@dashboard.lookup.create', $data);
         }
     }
@@ -76,6 +78,8 @@ class LookupController extends Controller {
         }else{
             $data['resource'] = $return_data['data']['items'];
             $data['medias'] = $this->media->index(null)['data']['items'];
+            $data['parents'] = $this->repository->index(null)['data']['items'];
+            $data['relateds'] = $this->repository->index(null)['data']['items'];
             return view('@dashboard.lookup.edit', $data);
         }
     }

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ActionsTableSeeder::class);
         $this->call(ScreensTableSeeder::class);
         $this->call(LookupsTableSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
     }
 }

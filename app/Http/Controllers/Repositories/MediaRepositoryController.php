@@ -31,7 +31,8 @@ class MediaRepositoryController extends Controller
 
         // Get All Resource
         $data_request = $this->get_data(new Media(), $request, [
-            "name" => "like",
+            "file_name" => "like",
+            "is_active" => "=",
         ]);
 
         $data = $this->general_response($this->success_list_message(), MediaResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);

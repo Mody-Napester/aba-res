@@ -40,7 +40,7 @@
                     @method('put')
 
                     <div class="row">
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="" for="display_name_{{ $lang }}">{{ trans('provider.display_name') }} ({{ $lang }})</label>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <label for="details_{{ $lang }}">{{ trans('course.details') }} ({{ $lang }})</label>
 

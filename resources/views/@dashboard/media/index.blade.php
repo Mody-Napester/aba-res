@@ -72,13 +72,9 @@
                                                     @endif
                                                 </div>
                                             </td>
-                                            <td>{{ $resource->media_type->name }}</td>
+                                            <td>{{ ($resource->media_type)? getTrans($resource->media_type->display_name, lang()) : '-' }}</td>
                                             <td>
-                                                @if($resource->media_type->name == 'image')
-                                                    <img src="{{ url('assets_public/files/image') . '/' . $resource->file_name }}" alt="image" class="img-thumbnail">
-                                                @elseif($resource->media_type->name == 'video')
-
-                                                @endif
+                                                @include('@dashboard.media._media_file')
                                             </td>
                                             <td>
                                                 @if($resource->is_active == 1)

@@ -15,4 +15,12 @@ return array (
   'reset' => 'Reset',
   'enter' => 'Enter',
   'list' => 'List',
+  'created_at' => 'Created at',
+  'created_by' => 'Created by',
+  'file' => 'File',
+  'is_active' => 'Is Active',
+  'is_published' => 'Is Published',
+  'phone' => 'Phone',
+  'updated_at' => 'Updated at',
+  'updated_by' => 'Updated by',
 );

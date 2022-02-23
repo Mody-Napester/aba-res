@@ -94,7 +94,7 @@
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="" for="name_{{ $lang }}">{{ trans('course.name') }} ({{ $lang }})</label>
@@ -166,7 +166,7 @@
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6 mb-2">
                                 <label for="short_details_{{ $lang }}">{{ trans('course.short_details') }} ({{ $lang }})</label>
 
@@ -184,7 +184,7 @@
                             </div>
                         @endforeach
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <label for="details_{{ $lang }}">{{ trans('course.details') }} ({{ $lang }})</label>
 

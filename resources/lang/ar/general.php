@@ -15,4 +15,12 @@ return array (
   'reset' => 'اعادة',
   'enter' => 'ادخل',
   'list' => 'قائمة العناصر',
+  'created_by' => 'بوسطة',
+  'updated_by' => 'تحديث بواسطة',
+  'created_at' => 'انشئ في',
+  'updated_at' => 'تاريخ التحديث',
+  'is_published' => 'منشور',
+  'phone' => 'التليفون',
+  'is_active' => 'مفعل',
+  'file' => 'ملف',
 );

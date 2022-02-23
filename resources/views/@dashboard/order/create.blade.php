@@ -38,7 +38,7 @@
                     @csrf
 
                     <div class="row">
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="" for="name_{{ $lang }}">{{ trans('order.name') }} ({{ $lang }})</label>
@@ -57,7 +57,7 @@
                             </div>
                         @endforeach
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="" for="speciality_{{ $lang }}">{{ trans('order.speciality') }} ({{ $lang }})</label>
@@ -139,7 +139,7 @@
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <label for="details_{{ $lang }}">{{ trans('order.details') }} ({{ $lang }})</label>
 

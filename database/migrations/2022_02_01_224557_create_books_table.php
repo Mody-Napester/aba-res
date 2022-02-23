@@ -20,7 +20,7 @@ class CreateBooksTable extends Migration
             $table->string('name');
             $table->float('price')->default(0);
             $table->integer('media_cover_id')->nullable();
-            $table->integer('media_image_id')->nullable();
+            $table->integer('media_book_id')->nullable();
             $table->text('details')->nullable();
 
             $table->boolean('is_free')->default(0);

@@ -74,9 +74,9 @@ class BookRepositoryController extends Controller
         }
 
         // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
+        $media_book = Media::getOneBy(['uuid' => $request->media_book_uuid]);
+        if(!$media_book){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_book')));
         }
 
         // Translate Attributes
@@ -88,7 +88,9 @@ class BookRepositoryController extends Controller
             'name' => $attributes_trans['name']['json'],
             'details' => $attributes_trans['details']['json'],
             'media_cover_id' => $media_cover->id,
-            'media_image_id' => $media_image->id,
+            'media_book_id' => $media_book->id,
+            'price' => ($request->has("price")) ? $request->price : 0,
+            'is_free' => ($request->has("is_free") && $request->is_free == 1) ? 1 : 0,
             'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,
             'created_by' => getCurrentUserId(),
         ];
@@ -157,9 +159,9 @@ class BookRepositoryController extends Controller
         }
 
         // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
+        $media_book = Media::getOneBy(['uuid' => $request->media_book_uuid]);
+        if(!$media_book){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_book')));
         }
 
         // Translate Attributes
@@ -171,7 +173,9 @@ class BookRepositoryController extends Controller
             'name' => ($attributes_trans['name']['json']) ? $attributes_trans['name']['json'] : $resource->name,
             'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
             'media_cover_id' => ($media_cover)? $media_cover->id : $resource->media_cover_id,
-            'media_image_id' => ($media_image)? $media_image->id : $resource->media_image_id,
+            'media_book_id' => ($media_book)? $media_book->id : $resource->media_book_id,
+            'price' => ($request->has("price")) ? $request->price : $resource->price,
+            'is_free' => ($request->has("is_free") && $request->is_free == 1) ? 1 : 0,
             'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,
             'updated_by' => getCurrentUserId(),
         ];

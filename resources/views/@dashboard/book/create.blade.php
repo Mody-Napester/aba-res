@@ -38,7 +38,8 @@
                     @csrf
 
                     <div class="row">
-                        @foreach(langs("short_name") as $lang)
+
+                        @foreach(langs() as $lang)
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label class="" for="name_{{ $lang }}">{{ trans('book.name') }} ({{ $lang }})</label>
@@ -57,16 +58,36 @@
                             </div>
                         @endforeach
 
-                        @foreach(langs("short_name") as $lang)
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="" for="speciality_{{ $lang }}">{{ trans('book.speciality') }} ({{ $lang }})</label>
-                                    <input class="form-control @error('speciality_'.$lang) is-invalid @enderror "
-                                           id="speciality_{{ $lang }}"
-                                           type="text" name="speciality_{{ $lang }}"
-                                           placeholder="{{ trans('general.enter') }} {{ trans('book.speciality') }} {{ $lang }} .." value="{{ old('speciality_' . $lang) }}">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="" for="media_cover_uuid">{{ trans('course.media_cover') }}</label>
+                                <select class="select2 form-control @error('media_cover_uuid') is-invalid @enderror" name="media_cover_uuid" id="media_cover_uuid">
+                                    <option value="choose">{{ trans('general.choose') }}</option>
+                                    @foreach($medias as $media)
+                                        <option value="{{$media->uuid}}">{{ $media->file_name }}</option>
+                                    @endforeach
+                                </select>
 
-                                    @error('speciality_'.$lang)
+                                @error('media_cover_uuid')
+                                <div class="invalid-feedback">
+                                    <i class="bx bx-radio-circle"></i>
+                                    {{ $message }}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="" for="media_book_uuid">{{ trans('course.media_book') }}</label>
+                                    <select class="select2 form-control @error('media_book_uuid') is-invalid @enderror" name="media_book_uuid" id="media_book_uuid">
+                                        <option value="choose">{{ trans('general.choose') }}</option>
+                                        @foreach($medias as $media)
+                                            <option value="{{$media->uuid}}">{{ $media->file_name }}</option>
+                                        @endforeach
+                                    </select>
+
+                                    @error('media_book_uuid')
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"></i>
                                         {{ $message }}
@@ -74,17 +95,16 @@
                                     @enderror
                                 </div>
                             </div>
-                        @endforeach
 
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="form-group">
-                                <label class="" for="phone">{{ trans('book.phone') }}</label>
-                                <input class="form-control @error('phone') is-invalid @enderror "
-                                       id="phone"
-                                       type="text" name="phone"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('book.phone') }} .." value="{{ old('phone') }}">
+                                <label class="" for="price">{{ trans('book.price') }}</label>
+                                <input class="form-control @error('price') is-invalid @enderror "
+                                       id="price"
+                                       type="text" name="price"
+                                       placeholder="{{ trans('general.enter') }} {{ trans('book.price') }} .." value="{{ old('price') }}">
 
-                                @error('phone')
+                                @error('price')
                                 <div class="invalid-feedback">
                                     <i class="bx bx-radio-circle"></i>
                                     {{ $message }}
@@ -93,53 +113,29 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="email">{{ trans('book.email') }}</label>
-                                <input class="form-control @error('email') is-invalid @enderror "
-                                       id="email"
-                                       type="email" name="email"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('book.email') }} .." value="{{ old('email') }}">
-
-                                @error('email')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="avatar">{{ trans('book.avatar') }}</label>
-                                <input class="form-control @error('avatar') is-invalid @enderror "
-                                       id="avatar"
-                                       type="text" name="avatar"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('book.avatar') }} .." value="{{ old('avatar') }}">
-
-                                @error('avatar')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-1">
-                                <label class="" for="">{{ trans('book.is_active') }}</label>
+                                <label class="" for="">{{ trans('book.is_free') }}</label>
                             </div>
 
                             <div class="custom-control custom-switch custom-control-inline mb-1">
-                                <input type="checkbox" name="is_active" class="custom-control-input" value="1" id="is_active">
-                                <label class="custom-control-label mr-1" for="is_active"></label>
-                                {{--                            <span>{{ trans('term.is_active') }}</span>--}}
+                                <input type="checkbox" name="is_free" class="custom-control-input" value="1" id="is_free">
+                                <label class="custom-control-label mr-1" for="is_free"></label>
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        <div class="col-md-4">
+                            <div class="mb-1">
+                                <label class="" for="">{{ trans('book.is_published') }}</label>
+                            </div>
+
+                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                <input type="checkbox" name="is_published" class="custom-control-input" value="1" id="is_published">
+                                <label class="custom-control-label mr-1" for="is_published"></label>
+                            </div>
+                        </div>
+
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <label for="details_{{ $lang }}">{{ trans('book.details') }} ({{ $lang }})</label>
 

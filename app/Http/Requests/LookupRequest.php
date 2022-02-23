@@ -29,7 +29,7 @@ class LookupRequest extends FormRequest
 //            'avatar' => 'required',
         ];
 
-//        foreach (langs("short_name") as $lang) {
+//        foreach (langs() as $lang) {
 //            $rules['name_' . $lang] = 'required|string';
 //            $rules['speciality_' . $lang] = 'required|string';
 //            $rules['details_' . $lang] = 'required|string';

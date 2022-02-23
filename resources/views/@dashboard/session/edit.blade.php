@@ -71,7 +71,7 @@
                             </div>
                         </div>
 
-                        @foreach(langs("short_name") as $lang)
+                        @foreach(langs() as $lang)
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="" for="name_{{ $lang }}">{{ trans('session.name') }} ({{ $lang }})</label>
