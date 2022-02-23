@@ -37,4 +37,5 @@ return array (
   'Settings' => 'الاعدادات',
   'e_commerce' => 'التجارة الالكترونية',
   'configuration' => 'الضبط والتحكم',
+  'Providers' => 'مزودي النظام',
 );

@@ -16,9 +16,15 @@ class CreateLookupsTable extends Migration
         Schema::create('lookups', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
+            $table->string('key')->nullable()->default(0);
+            $table->integer('parent_id')->nullable();
+            $table->integer('related_id')->nullable();
+            $table->integer('media_image_id')->nullable();
             $table->string('name');
-            $table->integer('parent_id');
+            $table->string('display_name')->nullable();
+            $table->string('details')->nullable();
             $table->boolean('is_active')->default(0);
+            $table->integer('ordering')->nullable();
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();
             $table->integer('deleted_by')->unsigned()->nullable();

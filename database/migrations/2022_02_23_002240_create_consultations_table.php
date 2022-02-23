@@ -15,6 +15,17 @@ class CreateConsultationsTable extends Migration
     {
         Schema::create('consultations', function (Blueprint $table) {
             $table->id();
+            $table->uuid('uuid');
+
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('country')->nullable();
+            $table->string('speciality')->nullable();
+            $table->string('degree')->nullable();
+            $table->string('details')->nullable();
+            $table->string('file')->nullable();
+
             $table->timestamps();
         });
     }

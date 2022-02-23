@@ -18,11 +18,13 @@ use \App\Http\Controllers\Monolithic\SessionController;
 use \App\Http\Controllers\Monolithic\LessonController;
 use \App\Http\Controllers\Monolithic\StudentController;
 use \App\Http\Controllers\Monolithic\BookController;
+use \App\Http\Controllers\Monolithic\ProviderController;
 use \App\Http\Controllers\Monolithic\SocialController;
 use \App\Http\Controllers\Monolithic\TestimonialController;
 use \App\Http\Controllers\Monolithic\CurrencyController;
 use \App\Http\Controllers\Monolithic\OrderController;
 use \App\Http\Controllers\Monolithic\ConsultationController;
+use \App\Http\Controllers\Monolithic\CommentController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -57,17 +59,17 @@ Route::group([
     Route::resource('lesson',LessonController::class);
     Route::resource('student',StudentController::class);
     Route::resource('book',BookController::class);
+    Route::resource('provider',ProviderController::class);
+    Route::resource('social',SocialController::class);
+    Route::resource('testimonial',TestimonialController::class);
 
     Route::resource('consultation',ConsultationController::class);
-    Route::resource('comment',ConsultationController::class);
+
+    Route::resource('comment',CommentController::class);
     Route::resource('setting',ConsultationController::class);
 
     // orders
     Route::resource('order',OrderController::class);
-
-    Route::resource('social',SocialController::class);
-    Route::resource('testimonial',TestimonialController::class);
-
     Route::resource('lookup',LookupController::class);
 
 });

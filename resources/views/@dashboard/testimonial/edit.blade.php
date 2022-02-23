@@ -62,13 +62,13 @@
                         @foreach(langs("short_name") as $lang)
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <label class="" for="speciality_{{ $lang }}">{{ trans('testimonial.speciality') }} ({{ $lang }})</label>
-                                    <input class="form-control @error('speciality_'.$lang) is-invalid @enderror "
-                                           id="speciality_{{ $lang }}"
-                                           type="text" name="speciality_{{ $lang }}"
-                                           placeholder="{{ trans('general.enter') }} {{ trans('testimonial.speciality') }} {{ $lang }} .." value="{{ getTrans($resource->speciality, $lang) }}">
+                                    <label class="" for="role_{{ $lang }}">{{ trans('testimonial.role') }} ({{ $lang }})</label>
+                                    <input class="form-control @error('role_'.$lang) is-invalid @enderror "
+                                           id="role_{{ $lang }}"
+                                           type="text" name="role_{{ $lang }}"
+                                           placeholder="{{ trans('general.enter') }} {{ trans('testimonial.role') }} {{ $lang }} .." value="{{ getTrans($resource->role, $lang) }}">
 
-                                    @error('speciality_'.$lang)
+                                    @error('role_'.$lang)
                                     <div class="invalid-feedback">
                                         <i class="bx bx-radio-circle"></i>
                                         {{ $message }}
@@ -78,71 +78,8 @@
                             </div>
                         @endforeach
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="phone">{{ trans('testimonial.phone') }}</label>
-                                <input class="form-control @error('phone') is-invalid @enderror "
-                                       id="phone"
-                                       type="text" name="phone"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('testimonial.phone') }} .." value="{{ $resource->phone }}">
-
-                                @error('phone')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="email">{{ trans('testimonial.email') }}</label>
-                                <input class="form-control @error('email') is-invalid @enderror "
-                                       id="email"
-                                       type="email" name="email"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('testimonial.email') }} .." value="{{ $resource->email }}">
-
-                                @error('email')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="avatar">{{ trans('testimonial.avatar') }}</label>
-                                <input class="form-control @error('avatar') is-invalid @enderror "
-                                       id="avatar"
-                                       type="text" name="avatar"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('testimonial.avatar') }} .." value="{{ $resource->avatar }}">
-
-                                @error('avatar')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-1">
-                                <label class="" for="">{{ trans('testimonial.is_default') }}</label>
-                            </div>
-
-                            <div class="custom-control custom-switch custom-control-inline mb-1">
-                                <input type="checkbox" name="is_active" class="custom-control-input" value="1" @if($resource->is_active == 1) checked @endif id="is_active">
-                                <label class="custom-control-label mr-1" for="is_active"></label>
-                                {{--                            <span>{{ trans('term.is_active') }}</span>--}}
-                            </div>
-                        </div>
-
                         @foreach(langs("short_name") as $lang)
-                            <div class="col-md-6">
+                            <div class="col-md-6 mb-2">
                                 <label for="details_{{ $lang }}">{{ trans('testimonial.details') }} ({{ $lang }})</label>
 
                                 <textarea class="form-control @error('details_'.$lang) is-invalid @enderror "
@@ -158,6 +95,17 @@
                                 </script>
                             </div>
                         @endforeach
+
+                        <div class="col-md-6">
+                            <div class="mb-1">
+                                <label class="" for="">{{ trans('testimonial.is_default') }}</label>
+                            </div>
+
+                            <div class="custom-control custom-switch custom-control-inline mb-1">
+                                <input type="checkbox" name="is_active" class="custom-control-input" value="1" @if($resource->is_active == 1) checked @endif id="is_active">
+                                <label class="custom-control-label mr-1" for="is_active"></label>
+                            </div>
+                        </div>
 
                     </div>
 

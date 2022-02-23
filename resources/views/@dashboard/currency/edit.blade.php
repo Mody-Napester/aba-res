@@ -41,7 +41,7 @@
 
                     <div class="row">
                         @foreach(langs("short_name") as $lang)
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="" for="name_{{ $lang }}">{{ trans('currency.name') }} ({{ $lang }})</label>
                                     <input class="form-control @error('name_'.$lang) is-invalid @enderror "
@@ -59,34 +59,15 @@
                             </div>
                         @endforeach
 
-                        @foreach(langs("short_name") as $lang)
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="" for="speciality_{{ $lang }}">{{ trans('currency.speciality') }} ({{ $lang }})</label>
-                                    <input class="form-control @error('speciality_'.$lang) is-invalid @enderror "
-                                           id="speciality_{{ $lang }}"
-                                           type="text" name="speciality_{{ $lang }}"
-                                           placeholder="{{ trans('general.enter') }} {{ trans('currency.speciality') }} {{ $lang }} .." value="{{ getTrans($resource->speciality, $lang) }}">
-
-                                    @error('speciality_'.$lang)
-                                    <div class="invalid-feedback">
-                                        <i class="bx bx-radio-circle"></i>
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>
-                            </div>
-                        @endforeach
-
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="" for="phone">{{ trans('currency.phone') }}</label>
-                                <input class="form-control @error('phone') is-invalid @enderror "
-                                       id="phone"
-                                       type="text" name="phone"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('currency.phone') }} .." value="{{ $resource->phone }}">
+                                <label class="" for="code">{{ trans('currency.code') }}</label>
+                                <input class="form-control @error('code') is-invalid @enderror "
+                                       id="code"
+                                       type="text" name="code"
+                                       placeholder="{{ trans('general.enter') }} {{ trans('currency.code') }} .." value="{{ $resource->code }}">
 
-                                @error('phone')
+                                @error('code')
                                 <div class="invalid-feedback">
                                     <i class="bx bx-radio-circle"></i>
                                     {{ $message }}
@@ -97,13 +78,13 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="" for="email">{{ trans('currency.email') }}</label>
-                                <input class="form-control @error('email') is-invalid @enderror "
-                                       id="email"
-                                       type="email" name="email"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('currency.email') }} .." value="{{ $resource->email }}">
+                                <label class="" for="symbol">{{ trans('currency.symbol') }}</label>
+                                <input class="form-control @error('symbol') is-invalid @enderror "
+                                       id="symbol"
+                                       type="text" name="symbol"
+                                       placeholder="{{ trans('general.enter') }} {{ trans('currency.symbol') }} .." value="{{ $resource->symbol }}">
 
-                                @error('email')
+                                @error('symbol')
                                 <div class="invalid-feedback">
                                     <i class="bx bx-radio-circle"></i>
                                     {{ $message }}
@@ -111,53 +92,6 @@
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="" for="avatar">{{ trans('currency.avatar') }}</label>
-                                <input class="form-control @error('avatar') is-invalid @enderror "
-                                       id="avatar"
-                                       type="text" name="avatar"
-                                       placeholder="{{ trans('general.enter') }} {{ trans('currency.avatar') }} .." value="{{ $resource->avatar }}">
-
-                                @error('avatar')
-                                <div class="invalid-feedback">
-                                    <i class="bx bx-radio-circle"></i>
-                                    {{ $message }}
-                                </div>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="col-md-6">
-                            <div class="mb-1">
-                                <label class="" for="">{{ trans('currency.is_default') }}</label>
-                            </div>
-
-                            <div class="custom-control custom-switch custom-control-inline mb-1">
-                                <input type="checkbox" name="is_active" class="custom-control-input" value="1" @if($resource->is_active == 1) checked @endif id="is_active">
-                                <label class="custom-control-label mr-1" for="is_active"></label>
-                                {{--                            <span>{{ trans('term.is_active') }}</span>--}}
-                            </div>
-                        </div>
-
-                        @foreach(langs("short_name") as $lang)
-                            <div class="col-md-6">
-                                <label for="details_{{ $lang }}">{{ trans('currency.details') }} ({{ $lang }})</label>
-
-                                <textarea class="form-control @error('details_'.$lang) is-invalid @enderror "
-                                          id="details_{{ $lang }}" name="details_{{ $lang }}"
-                                          placeholder="Enter details_{{ $lang }} ..">{{ getTrans($resource->details, $lang) }}</textarea>
-
-                                @error('details_'.$lang)
-                                <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-
-                                <script>
-                                    CKEDITOR.replace( 'details_{{ $lang }}' );
-                                </script>
-                            </div>
-                        @endforeach
 
                     </div>
 

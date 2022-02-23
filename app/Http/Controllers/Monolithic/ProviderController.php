@@ -3,22 +3,21 @@
 namespace App\Http\Controllers\Monolithic;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Repositories\BookRepositoryController;
-use App\Http\Controllers\Repositories\MediaRepositoryController;
+use App\Http\Controllers\Repositories\ProviderRepositoryController;
+use App\Http\Requests\ProviderRequest;
+use App\Models\Provider;
 use Illuminate\Http\Request;
 
-class BookController extends Controller {
+class ProviderController extends Controller {
 
     public $repository;
-    public $media;
 
     /**
      * Display a listing of the resource.
      */
     public function __construct()
     {
-        $this->repository = new BookRepositoryController('monolithic');
-        $this->media = new MediaRepositoryController('monolithic');
+        $this->repository = new ProviderRepositoryController('monolithic');
     }
 
     /**
@@ -31,7 +30,7 @@ class BookController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resources'] = $return_data['data']['items'];
-            return view('@dashboard.book.index', $data);
+            return view('@dashboard.provider.index', $data);
         }
     }
 
@@ -45,8 +44,7 @@ class BookController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resource'] = $return_data['data']['items'];
-            $data['medias'] = $this->media->index(null)['data']['items'];
-            return view('@dashboard.book.create', $data);
+            return view('@dashboard.provider.create', $data);
         }
     }
 
@@ -59,7 +57,7 @@ class BookController extends Controller {
         if($return_data['status']['reason'] == 'permission_failed'){
             return redirect_permission_fail();
         }else{
-            return redirect(route('book.index'));
+            return redirect(route('provider.index'));
         }
     }
 
@@ -73,8 +71,7 @@ class BookController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resource'] = $return_data['data']['items'];
-            $data['medias'] = $this->media->index(null)['data']['items'];
-            return view('@dashboard.book.edit', $data);
+            return view('@dashboard.provider.edit', $data);
         }
     }
 
@@ -87,7 +84,7 @@ class BookController extends Controller {
         if($return_data['status']['reason'] == 'permission_failed'){
             return redirect_permission_fail();
         }else{
-            return redirect(route('book.index'));
+            return redirect(route('provider.index'));
         }
     }
 
@@ -100,7 +97,7 @@ class BookController extends Controller {
         if($return_data['status']['reason'] == 'permission_failed'){
             return redirect_permission_fail();
         }else{
-            return redirect(route('book.index'));
+            return redirect(route('provider.index'));
         }
     }
 }

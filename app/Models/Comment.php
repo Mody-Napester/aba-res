@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Consultation extends Model
+class Comment extends Model
 {
-    use HasFactory, GeneralHelperTrait;
-
-//    public $timestamps = false;
+    use HasFactory, SoftDeletes,GeneralHelperTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -20,14 +18,12 @@ class Consultation extends Model
      */
     protected $fillable = [
         'uuid',
-        'name',
-        'email',
-        'phone',
-        'country',
-        'speciality',
-        'degree',
+        'user_id',
+        'course_id',
         'details',
-        'file',
+        'created_by',
+        'updated_by',
+        'deleted_by',
     ];
 
     /**
@@ -103,5 +99,45 @@ class Consultation extends Model
         $model = new self();
         $result = $model->getFromModelByParameters($model, $parameters);
         return $result->get();
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     *  Relationship with courses
+     */
+    public function course()
+    {
+        return $this->belongsTo(Course::class, 'course_id', 'id');
     }
 }

@@ -37,4 +37,5 @@ return array (
   'Settings' => 'Settings',
   'e_commerce' => 'E-Commerce',
   'configuration' => 'Configuration',
+  'Providers' => 'Providers',
 );

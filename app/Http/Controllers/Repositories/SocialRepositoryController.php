@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Repositories;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\SocialResource;
+use App\Models\Provider;
 use App\Models\Social;
 use App\Models\Instructor;
 use App\Models\Media;
@@ -68,39 +69,16 @@ class SocialRepositoryController extends Controller
         }
 
         // Check Instructor
-        $instructor = Instructor::getOneBy(['uuid' => $request->instructor_uuid]);
-        if(!$instructor){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.instructor')));
+        $provider = Provider::getOneBy(['uuid' => $request->provider_uuid]);
+        if(!$provider){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.provider')));
         }
-
-        // Check Media Banner
-        $media_banner = Media::getOneBy(['uuid' => $request->media_banner_uuid]);
-        if(!$media_banner){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_banner')));
-        }
-
-        // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
-        }
-
-        // Translate Attributes
-        $attributes_trans = setAttributesTrans([
-            'name', 'short_details', 'details'
-        ]);
 
         $fields = [
-            'instructor_id' => $instructor->id,
-            'name' => $attributes_trans['name']['json'],
-            'short_details' => $attributes_trans['short_details']['json'],
-            'details' => $attributes_trans['details']['json'],
-            'media_banner_id' => $media_banner->id,
-            'media_image_id' => $media_image->id,
-            'price' => ($request->has("price")) ? $request->price : 0,
-            'time_frame' => ($request->has("time_frame")) ? $request->time_frame : 0,
-            'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,
-            'created_by' => auth()->user()->id,
+            'provider_id' => $provider->id,
+            'url' => ($request->has("url")) ? $request->url : 0,
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
+            'created_by' => getCurrentUserId(),
         ];
 
         // Do Code
@@ -161,39 +139,16 @@ class SocialRepositoryController extends Controller
         }
 
         // Check Instructor
-        $instructor = Instructor::getOneBy(['uuid' => $request->instructor_uuid]);
-        if(!$instructor){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.instructor')));
+        $provider = Provider::getOneBy(['uuid' => $request->provider_uuid]);
+        if(!$provider){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.provider')));
         }
-
-        // Check Media Banner
-        $media_banner = Media::getOneBy(['uuid' => $request->media_banner_uuid]);
-        if(!$media_banner){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_banner')));
-        }
-
-        // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
-        }
-
-        // Translate Attributes
-        $attributes_trans = setAttributesTrans([
-            'name', 'short_details', 'details'
-        ]);
 
         $fields = [
-            'instructor_id' => ($instructor)? $instructor->id : $resource->instructor_id,
-            'name' => ($attributes_trans['name']['json']) ? $attributes_trans['name']['json'] : $resource->name,
-            'short_details' => ($attributes_trans['short_details']['json']) ? $attributes_trans['short_details']['json'] : $resource->short_details,
-            'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
-            'media_banner_id' => ($media_banner)? $media_banner->id : $resource->media_banner_id,
-            'media_image_id' => ($media_image)? $media_image->id : $resource->media_banner_id,
-            'price' => ($request->has("price")) ? $request->price : $resource->price,
-            'time_frame' => ($request->has("time_frame")) ? $request->time_frame : $resource->time_frame,
-            'is_published' => ($request->has("is_published") && $request->is_published == 1) ? $request->is_published : $resource->is_published,
-            'updated_by' => auth()->user()->id,
+            'provider_id' => ($provider)? $provider->id : $resource->provider_id,
+            'url' => ($request->has("url")) ? $request->url : $resource->url,
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
+            'updated_by' => getCurrentUserId(),
         ];
 
         // Do Code

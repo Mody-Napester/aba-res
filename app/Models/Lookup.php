@@ -16,9 +16,12 @@ class Lookup extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'parent_id',
         'key',
+        'parent_id',
+        'related_id',
+        'media_image_id',
+        'name',
+        'display_name',
         'details',
         'is_active',
         'ordering',

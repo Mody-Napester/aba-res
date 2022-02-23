@@ -7,11 +7,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Consultation extends Model
+class Provider extends Model
 {
-    use HasFactory, GeneralHelperTrait;
-
-//    public $timestamps = false;
+    use HasFactory, SoftDeletes, GeneralHelperTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -21,13 +19,14 @@ class Consultation extends Model
     protected $fillable = [
         'uuid',
         'name',
-        'email',
-        'phone',
-        'country',
-        'speciality',
-        'degree',
+        'display_name',
         'details',
-        'file',
+        'class',
+        'color',
+        'is_active',
+        'created_by',
+        'updated_by',
+        'deleted_by',
     ];
 
     /**
@@ -103,5 +102,29 @@ class Consultation extends Model
         $model = new self();
         $result = $model->getFromModelByParameters($model, $parameters);
         return $result->get();
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function createdBy()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function updatedBy()
+    {
+        return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     *  Relationship with users
+     */
+    public function deletedBy()
+    {
+        return $this->belongsTo(User::class, 'deleted_by');
     }
 }

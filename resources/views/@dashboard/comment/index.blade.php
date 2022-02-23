@@ -1,6 +1,6 @@
 @extends('@dashboard._layouts.master')
 
-@section('title') {{ trans('testimonial.page_title') }} @endsection
+@section('title') {{ trans('comment.page_title') }} @endsection
 
 @section('post_head')
     <script src="{{ url('assets_dashboard/assets-custom/ckeditor/ckeditor.js') }}"></script>
@@ -12,15 +12,11 @@
     <div class="content-header row">
         <div class="content-header-left col-12 mb-2 mt-1">
             <div class="breadcrumbs-top">
-                <div class="float-right">
-                    <a href="{{ route('testimonial.create') }}" class="btn btn-sm btn-success"><i class="bx bxs-book-add"></i> {{ trans('general.create_new') }}</a>
-                </div>
-
-                <h5 class="content-header-title float-left pr-1 mb-0">{{ trans('testimonial.testimonials') }}</h5>
+                <h5 class="content-header-title float-left pr-1 mb-0">{{ trans('comment.comments') }}</h5>
                 <div class="breadcrumb-wrapper d-none d-sm-block">
                     <ol class="breadcrumb p-0 mb-0 pl-1">
                         <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bx bx-home-alt"></i></a></li>
-                        <li class="breadcrumb-item active">{{ trans('testimonial.testimonials') }}</li>
+                        <li class="breadcrumb-item active">{{ trans('comment.comments') }}</li>
                     </ol>
                 </div>
             </div>
@@ -45,14 +41,13 @@
                                 <tr>
                                     <th>#</th>
                                     <th>{{ trans('general.control') }}</th>
-                                    <th>{{ trans('testimonial.name') }}</th>
-                                    <th>{{ trans('testimonial.role') }}</th>
-                                    <th>{{ trans('testimonial.details') }}</th>
-                                    <th>{{ trans('testimonial.is_active') }}</th>
-                                    <th>{{ trans('testimonial.created_by') }}</th>
-                                    <th>{{ trans('testimonial.updated_by') }}</th>
-                                    <th>{{ trans('testimonial.created_at') }}</th>
-                                    <th>{{ trans('testimonial.updated_at') }}</th>
+                                    <th>{{ trans('comment.user') }}</th>
+                                    <th>{{ trans('comment.course') }}</th>
+                                    <th>{{ trans('comment.details') }}</th>
+                                    <th>{{ trans('general.created_by') }}</th>
+                                    <th>{{ trans('general.updated_by') }}</th>
+                                    <th>{{ trans('general.created_at') }}</th>
+                                    <th>{{ trans('general.updated_at') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -61,28 +56,21 @@
                                             <td>{{ ++$key }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    @if(check_authority('edit.testimonial'))
-                                                        <a href="{{ route('testimonial.edit', [$resource->uuid]) }}" class="btn btn-sm btn-success">
+                                                    @if(check_authority('edit.comment'))
+                                                        <a href="{{ route('comment.edit', [$resource->uuid]) }}" class="btn btn-sm btn-success">
                                                             <i class="bx bx-edit"></i>
                                                         </a>
                                                     @endif
-                                                    @if(check_authority('delete.testimonial'))
-                                                        <a href="{{ route('testimonial.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
+                                                    @if(check_authority('delete.comment'))
+                                                        <a href="{{ route('comment.destroy', [$resource->uuid]) }}" class="confirm-delete btn btn-sm btn-danger">
                                                             <i class="bx bx-trash"></i>
                                                         </a>
                                                     @endif
                                                 </div>
                                             </td>
-                                            <td>{{ getTrans($resource->name, lang()) }}</td>
-                                            <td>{{ getTrans($resource->role, lang()) }}</td>
-                                            <td>{!! getTrans($resource->details, lang()) !!}</td>
-                                            <td>
-                                                @if($resource->is_active == 1)
-                                                    <span class="badge badge-light-success">Yes</span>
-                                                @else
-                                                    <span class="badge badge-light-danger">No</span>
-                                                @endif
-                                            </td>
+                                            <td>{{ $resource->user }}</td>
+                                            <td>{{ $resource->course }}</td>
+                                            <td>{{ $resource->details }}</td>
                                             <td>{{ $resource->createdBy->name }}</td>
                                             <td>{{ ($resource->updatedBy)? $resource->updatedBy->name : '' }}</td>
                                             <td>{{ custom_date($resource->created_at) }}</td>

@@ -20,6 +20,7 @@ class Book extends Model
         'uuid',
 
         'name',
+        'media_cover_id',
         'media_image_id',
         'details',
         'is_published',

@@ -183,7 +183,7 @@ class CourseRepositoryController extends Controller
             'short_details' => ($attributes_trans['short_details']['json']) ? $attributes_trans['short_details']['json'] : $resource->short_details,
             'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
             'media_banner_id' => ($media_banner)? $media_banner->id : $resource->media_banner_id,
-            'media_image_id' => ($media_image)? $media_image->id : $resource->media_banner_id,
+            'media_image_id' => ($media_image)? $media_image->id : $resource->media_image_id,
             'price' => ($request->has("price")) ? $request->price : $resource->price,
             'time_frame' => ($request->has("time_frame")) ? $request->time_frame : $resource->time_frame,
             'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,

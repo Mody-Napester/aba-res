@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Repositories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\BookResource;
-use App\Models\Book;
-use App\Models\Instructor;
+use App\Http\Resources\CommentResource;
+use App\Models\Comment;
 use App\Models\Media;
 use App\Traits\MessagesHelperTrait;
 use App\Traits\RequestHelperTrait;
 use App\Traits\ResponseHelperTrait;
 
-class BookRepositoryController extends Controller
+class CommentRepositoryController extends Controller
 {
     use MessagesHelperTrait, RequestHelperTrait, ResponseHelperTrait;
 
@@ -26,16 +25,16 @@ class BookRepositoryController extends Controller
     public function index($request)
     {
         // Check Permissions
-        if(!check_authority('list.book')){
+        if(!check_authority('list.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Get All Resource
-        $data_request = $this->get_data(new Book(), $request, [
+        $data_request = $this->get_data(new Comment(), $request, [
             "name" => "like",
         ]);
 
-        $data = $this->general_response($this->success_list_message(), BookResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);
+        $data = $this->general_response($this->success_list_message(), CommentResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);
 
         // Return
         return $data;
@@ -47,7 +46,7 @@ class BookRepositoryController extends Controller
     public function create($request)
     {
         // Check Permissions
-        if(!check_authority('add.book')){
+        if(!check_authority('add.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
@@ -63,47 +62,38 @@ class BookRepositoryController extends Controller
     public function store($request)
     {
         // Check Permissions
-        if(!check_authority('add.book')){
+        if(!check_authority('add.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
-        // Check Media Cover
-        $media_cover = Media::getOneBy(['uuid' => $request->media_cover_uuid]);
-        if(!$media_cover){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_cover')));
-        }
-
         // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
+        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
+        if(!$avatar){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
         }
 
         // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'details'
+            'name', 'speciality', 'details'
         ]);
 
         $fields = [
             'name' => $attributes_trans['name']['json'],
+            'speciality' => $attributes_trans['speciality']['json'],
             'details' => $attributes_trans['details']['json'],
-            'media_cover_id' => $media_cover->id,
-            'media_image_id' => $media_image->id,
-            'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,
+            'phone' => ($request->has("phone")) ? $request->phone : '',
+            'email' => ($request->has("email")) ? $request->email : '',
+            'avatar' => $avatar->id,
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
             'created_by' => getCurrentUserId(),
         ];
 
         // Do Code
-        try {
-            $resource = Book::store($fields);
-        }catch (\Exception $exception){
-            $exceptions = 'Message : ' . $exception->getMessage() . ' File : ' . $exception->getFile();
-            return $this->general_response($this->fail_exception_message($exceptions));
-        }
+        $resource = Comment::store($fields);
 
         // Return
         if($resource){
-            $data = $this->general_response($this->success_create_message(), new BookResource($resource), 1);
+            $data = $this->general_response($this->success_create_message(), new CommentResource($resource), 1);
         }else{
             $data = $this->general_response($this->fail_create_message());
         }
@@ -118,14 +108,14 @@ class BookRepositoryController extends Controller
     public function edit($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('edit.book')){
+        if(!check_authority('edit.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
-        $resource = Book::getOneBy(['uuid' => $uuid]);
+        $resource = Comment::getOneBy(['uuid' => $uuid]);
 
         if($resource){
-            $data = $this->general_response($this->success_update_message(), new BookResource($resource), 1, false);
+            $data = $this->general_response($this->success_update_message(), new CommentResource($resource), 1, false);
         }else{
             $data = $this->general_response($this->fail_update_message());
         }
@@ -140,53 +130,43 @@ class BookRepositoryController extends Controller
     public function update($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('edit.book')){
+        if(!check_authority('edit.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Check Resource
-        $resource = Book::getOneBy(['uuid' => $uuid]);
+        $resource = Comment::getOneBy(['uuid' => $uuid]);
         if(!$resource){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.book')));
-        }
-
-        // Check Media Cover
-        $media_cover = Media::getOneBy(['uuid' => $request->media_cover_uuid]);
-        if(!$media_cover){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_cover')));
+            return $this->general_response($this->fail_resource_not_found_message());
         }
 
         // Check Media Image
-        $media_image = Media::getOneBy(['uuid' => $request->media_image_uuid]);
-        if(!$media_image){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.media_image')));
+        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
+        if(!$avatar){
+            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
         }
 
-        // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'details'
+            'name', 'speciality', 'details'
         ]);
 
         $fields = [
             'name' => ($attributes_trans['name']['json']) ? $attributes_trans['name']['json'] : $resource->name,
+            'speciality' => ($attributes_trans['speciality']['json']) ? $attributes_trans['speciality']['json'] : $resource->speciality,
             'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
-            'media_cover_id' => ($media_cover)? $media_cover->id : $resource->media_cover_id,
-            'media_image_id' => ($media_image)? $media_image->id : $resource->media_image_id,
-            'is_published' => ($request->has("is_published") && $request->is_published == 1) ? 1 : 0,
+            'phone' => ($request->has("phone")) ? $request->phone : $resource->phone,
+            'email' => ($request->has("email")) ? $request->email : $resource->email,
+            'avatar' => ($avatar) ? $avatar->id : $resource->avatar,
+            'is_active' => ($request->has("is_active") && in_array($request->is_active, [0,1])) ? $request->is_active : $resource->is_active,
             'updated_by' => getCurrentUserId(),
         ];
 
         // Do Code
-        try {
-            $updatedResource = Book::edit($fields, $resource->id);
-        }catch (\Exception $exception){
-            $exceptions = 'Message : ' . $exception->getMessage() . ' File : ' . $exception->getFile();
-            return $this->general_response($this->fail_exception_message($exceptions));
-        }
+        $updatedResource = Comment::edit($fields, $resource->id);
 
         // Return
         if($updatedResource){
-            $data = $this->general_response($this->success_update_message(), new BookResource($resource), 1);
+            $data = $this->general_response($this->success_update_message(), new CommentResource($resource), 1);
         }else{
             $data = $this->general_response($this->fail_update_message());
         }
@@ -201,14 +181,14 @@ class BookRepositoryController extends Controller
     public function destroy($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('delete.book')){
+        if(!check_authority('delete.comment')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Check Resource
-        $resource = Book::getOneBy(['uuid' => $uuid]);
+        $resource = Comment::getOneBy(['uuid' => $uuid]);
         if($resource){
-            $deletedResource = Book::remove($resource->id);
+            $deletedResource = Comment::remove($resource->id);
 
             if ($deletedResource){
                 $data = $this->general_response($this->success_delete_message());
@@ -223,3 +203,4 @@ class BookRepositoryController extends Controller
         return $data;
     }
 }
+

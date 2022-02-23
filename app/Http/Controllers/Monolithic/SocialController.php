@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Monolithic;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Repositories\ProviderRepositoryController;
 use App\Http\Controllers\Repositories\SocialRepositoryController;
 use Illuminate\Http\Request;
 
 class SocialController extends Controller {
 
     public $repository;
+    public $provider;
 
     /**
      * Display a listing of the resource.
@@ -16,6 +18,7 @@ class SocialController extends Controller {
     public function __construct()
     {
         $this->repository = new SocialRepositoryController('monolithic');
+        $this->provider = new ProviderRepositoryController('monolithic');
     }
 
     /**
@@ -42,6 +45,7 @@ class SocialController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resource'] = $return_data['data']['items'];
+            $data['providers'] = $this->provider->index(null)['data']['items'];
             return view('@dashboard.social.create', $data);
         }
     }
@@ -69,6 +73,7 @@ class SocialController extends Controller {
             return redirect_permission_fail();
         }else{
             $data['resource'] = $return_data['data']['items'];
+            $data['providers'] = $this->provider->index(null)['data']['items'];
             return view('@dashboard.social.edit', $data);
         }
     }

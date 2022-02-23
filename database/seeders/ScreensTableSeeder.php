@@ -17,7 +17,7 @@ class ScreensTableSeeder extends Seeder
     public function run()
     {
         $data = [
-//            ['name' => 'action', 'child' => ['list', 'add', 'edit', 'show', 'delete', 'use', 'print', 'download']],
+//            ['name' => 'action', 'child' => ['list', 'add', 'edit', 'show', 'delete', 'use', 'print', 'download', 'change_status']],
             ['name' => 'dashboard', 'child' => ['list', 'use']],
             ['name' => 'work_flow', 'child' => ['use']],
             ['name' => 'security', 'child' => ['use']],
@@ -33,9 +33,14 @@ class ScreensTableSeeder extends Seeder
             ['name' => 'lesson', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
             ['name' => 'student', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
             ['name' => 'book', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
+            ['name' => 'currency', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
             ['name' => 'social', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
+            ['name' => 'provider', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
+            ['name' => 'setting', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
             ['name' => 'testimonial', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
             ['name' => 'translations', 'child' => ['list']],
+            ['name' => 'comment', 'child' => ['list', 'add', 'edit', 'show', 'delete']],
+            ['name' => 'order', 'child' => ['list', 'add', 'edit', 'show', 'print', 'change_status']],
         ];
 
         foreach ($data as $row_key => $row){

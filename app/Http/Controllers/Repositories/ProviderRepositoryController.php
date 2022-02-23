@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Repositories;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\InstructorResource;
-use App\Models\Instructor;
+use App\Http\Resources\ProviderResource;
+use App\Models\Provider;
 use App\Models\Media;
 use App\Traits\MessagesHelperTrait;
 use App\Traits\RequestHelperTrait;
 use App\Traits\ResponseHelperTrait;
 
-class InstructorRepositoryController extends Controller
+class ProviderRepositoryController extends Controller
 {
     use MessagesHelperTrait, RequestHelperTrait, ResponseHelperTrait;
 
@@ -25,16 +25,16 @@ class InstructorRepositoryController extends Controller
     public function index($request)
     {
         // Check Permissions
-        if(!check_authority('list.instructor')){
+        if(!check_authority('list.provider')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Get All Resource
-        $data_request = $this->get_data(new Instructor(), $request, [
+        $data_request = $this->get_data(new Provider(), $request, [
             "name" => "like",
         ]);
 
-        $data = $this->general_response($this->success_list_message(), InstructorResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);
+        $data = $this->general_response($this->success_list_message(), ProviderResource::collection($data_request['resources']->get()), $data_request['resources']->count(), false);
 
         // Return
         return $data;
@@ -46,7 +46,7 @@ class InstructorRepositoryController extends Controller
     public function create($request)
     {
         // Check Permissions
-        if(!check_authority('add.instructor')){
+        if(!check_authority('add.provider')){
             return $this->general_response($this->fail_permission_message());
         }
 
@@ -62,38 +62,31 @@ class InstructorRepositoryController extends Controller
     public function store($request)
     {
         // Check Permissions
-        if(!check_authority('add.instructor')){
+        if(!check_authority('add.provider')){
             return $this->general_response($this->fail_permission_message());
-        }
-
-        // Check Media Image
-        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
-        if(!$avatar){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
         }
 
         // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'speciality', 'details'
+            'display_name', 'details'
         ]);
 
         $fields = [
-            'name' => $attributes_trans['name']['json'],
-            'speciality' => $attributes_trans['speciality']['json'],
+            'name' => $request->name,
+            'display_name' => $attributes_trans['display_name']['json'],
             'details' => $attributes_trans['details']['json'],
-            'phone' => ($request->has("phone")) ? $request->phone : '',
-            'email' => ($request->has("email")) ? $request->email : '',
-            'avatar' => $avatar->id,
+            'class' => $request->class,
+            'color' => $request->color,
             'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
             'created_by' => getCurrentUserId(),
         ];
 
         // Do Code
-        $resource = Instructor::store($fields);
+        $resource = Provider::store($fields);
 
         // Return
         if($resource){
-            $data = $this->general_response($this->success_create_message(), new InstructorResource($resource), 1);
+            $data = $this->general_response($this->success_create_message(), new ProviderResource($resource), 1);
         }else{
             $data = $this->general_response($this->fail_create_message());
         }
@@ -108,14 +101,14 @@ class InstructorRepositoryController extends Controller
     public function edit($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('edit.instructor')){
+        if(!check_authority('edit.provider')){
             return $this->general_response($this->fail_permission_message());
         }
 
-        $resource = Instructor::getOneBy(['uuid' => $uuid]);
+        $resource = Provider::getOneBy(['uuid' => $uuid]);
 
         if($resource){
-            $data = $this->general_response($this->success_update_message(), new InstructorResource($resource), 1, false);
+            $data = $this->general_response($this->success_update_message(), new ProviderResource($resource), 1, false);
         }else{
             $data = $this->general_response($this->fail_update_message());
         }
@@ -130,43 +123,37 @@ class InstructorRepositoryController extends Controller
     public function update($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('edit.instructor')){
+        if(!check_authority('edit.provider')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Check Resource
-        $resource = Instructor::getOneBy(['uuid' => $uuid]);
+        $resource = Provider::getOneBy(['uuid' => $uuid]);
         if(!$resource){
             return $this->general_response($this->fail_resource_not_found_message());
         }
 
-        // Check Media Image
-        $avatar = Media::getOneBy(['uuid' => $request->avatar]);
-        if(!$avatar){
-            return $this->general_response($this->fail_resource_not_found_message(trans('messages.avatar')));
-        }
-
+        // Translate Attributes
         $attributes_trans = setAttributesTrans([
-            'name', 'speciality', 'details'
+            'display_name', 'details'
         ]);
 
         $fields = [
-            'name' => ($attributes_trans['name']['json']) ? $attributes_trans['name']['json'] : $resource->name,
-            'speciality' => ($attributes_trans['speciality']['json']) ? $attributes_trans['speciality']['json'] : $resource->speciality,
+            'name' => ($request->has('name'))? $request->name : $resource->name,
+            'display_name' => ($attributes_trans['display_name']['json']) ? $attributes_trans['display_name']['json'] : $resource->display_name,
             'details' => ($attributes_trans['details']['json']) ? $attributes_trans['details']['json'] : $resource->details,
-            'phone' => ($request->has("phone")) ? $request->phone : $resource->phone,
-            'email' => ($request->has("email")) ? $request->email : $resource->email,
-            'avatar' => ($avatar) ? $avatar->id : $resource->avatar,
-            'is_active' => ($request->has("is_active") && in_array($request->is_active, [0,1])) ? $request->is_active : $resource->is_active,
+            'class' => ($request->has('class'))? $request->class : $resource->class,
+            'color' => ($request->has('color'))? $request->color : $resource->color,
+            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
             'updated_by' => getCurrentUserId(),
         ];
 
         // Do Code
-        $updatedResource = Instructor::edit($fields, $resource->id);
+        $updatedResource = Provider::edit($fields, $resource->id);
 
         // Return
         if($updatedResource){
-            $data = $this->general_response($this->success_update_message(), new InstructorResource($resource), 1);
+            $data = $this->general_response($this->success_update_message(), new ProviderResource($resource), 1);
         }else{
             $data = $this->general_response($this->fail_update_message());
         }
@@ -181,14 +168,14 @@ class InstructorRepositoryController extends Controller
     public function destroy($request, $uuid)
     {
         // Check Permissions
-        if(!check_authority('delete.instructor')){
+        if(!check_authority('delete.provider')){
             return $this->general_response($this->fail_permission_message());
         }
 
         // Check Resource
-        $resource = Instructor::getOneBy(['uuid' => $uuid]);
+        $resource = Provider::getOneBy(['uuid' => $uuid]);
         if($resource){
-            $deletedResource = Instructor::remove($resource->id);
+            $deletedResource = Provider::remove($resource->id);
 
             if ($deletedResource){
                 $data = $this->general_response($this->success_delete_message());

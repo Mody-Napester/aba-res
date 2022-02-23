@@ -24,6 +24,7 @@ class ActionsTableSeeder extends Seeder
             ['name' => 'use'],
             ['name' => 'print'],
             ['name' => 'download'],
+            ['name' => 'change_status'],
         ];
 
         foreach ($data as $row_key => $row){

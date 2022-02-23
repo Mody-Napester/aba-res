@@ -75,6 +75,12 @@
                     </li>
                 @endif
 
+                @if(check_authority('list.provider'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('provider.index') }}"><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Providers">{{ trans('sidebar.Providers') }}</span></a>
+                </li>
+                @endif
+
                 @if(check_authority('list.social'))
                 <li class="nav-item">
                     <a class="d-flex align-items-center" href="{{ route('social.index') }}"><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Socials">{{ trans('sidebar.Social_Accounts') }}</span></a>
@@ -155,13 +161,13 @@
             <a href="#"><i class="bx bx-shopping-bag"></i><span class="menu-title text-truncate" data-i18n="E-Commerce">{{ trans('sidebar.e_commerce') }}</span></a>
             <ul class="menu-content">
 
-                @if(check_authority('list.instructor'))
+                @if(check_authority('list.book'))
                 <li class="nav-item">
                     <a class="d-flex align-items-center" href="{{ route('book.index') }}"><i class="bx bx-book"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Books') }}</span></a>
                 </li>
                 @endif
 
-                @if(check_authority('list.instructor'))
+                @if(check_authority('list.order'))
                 <li class="nav-item">
                     <a class="d-flex align-items-center" href="{{ route('order.index') }}"><i class="bx bx-cart"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Orders') }}</span></a>
                 </li>
