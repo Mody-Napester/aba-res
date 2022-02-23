@@ -23,12 +23,14 @@
 
                                     <div class="form-group mb-50">
                                         <label class="text-bold-600" for="email">{{ trans('login.Email') }}</label>
-                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email" placeholder="{{ trans('login.Email') }}" required>
+{{--                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control" id="email" placeholder="{{ trans('login.Email') }}" required>--}}
+                                        <input type="email" name="email" value="admin@admin.dev" class="form-control" id="email" placeholder="{{ trans('login.Email') }}" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label class="text-bold-600" for="password">{{ trans('login.Password') }}</label>
-                                        <input type="password" name="password" class="form-control" id="password" placeholder="{{ trans('login.Password') }}" required autocomplete="current-password">
+{{--                                        <input type="password" name="password" class="form-control" id="password" placeholder="{{ trans('login.Password') }}" required autocomplete="current-password">--}}
+                                        <input type="password" name="password" class="form-control" value="12345678" id="password" placeholder="{{ trans('login.Password') }}" required autocomplete="current-password">
                                     </div>
 
                                     <button type="submit" class="btn btn-primary glow w-100 position-relative">

@@ -17,6 +17,8 @@ class CreateReviewsTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->integer('course_id')->nullable();
+            $table->float('rate')->nullable();
 
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();

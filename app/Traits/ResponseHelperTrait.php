@@ -4,64 +4,49 @@ namespace App\Traits;
 
 trait ResponseHelperTrait
 {
-
-    public $status_code_100 = 100; // Information Response
-    public $status_code_200 = 200; // Success Response
-    public $status_code_301 = 301; // Redirect
-    public $status_code_400 = 400; // Client Response
-    public $status_code_401 = 401; // Unauthorized
-    public $status_code_500 = 500; // Server Error
+    public $response_type;
 
     // Return General Response
-    public function general_response($resource_items, $total_items,
-                                     $message = '', $status_code = null,
-                                     $has_pagination = true, $current_page = null, $take_count = null)
+    public function general_response($client_message, $resource_items = false, $total_items = 0, $show_message = true)
     {
-        if ($has_pagination) {
-            $dataPagination = [
-                'items' => $resource_items,
-                'total' => $total_items,
-                'pageNumber' => $current_page,
-                'pageSize' => $take_count,
-            ];
-        } else {
-            $dataPagination = $resource_items;
+        if($resource_items == false){
+            $items = [];
+        }else{
+            $items = $resource_items;
         }
 
         $data = [
-            'data' => $dataPagination,
-            'message' => $message,
-            'statusCode' => $status_code,
+            'status' => $client_message['status'],
+            'data' => [
+                'items' => $items,
+                'count' => $total_items,
+            ],
         ];
 
-        return response($data, $status_code);
-    }
+        // Microservice
+        if($this->response_type == 'microservice'){
+            return response($data, $client_message['status']['code']);
+        }
+        // Default Monolithic
+        else {
+            if($show_message){
+                // The Return Message
+                if($client_message['status']['type'] == 'success'){
+                    toastr()->success($client_message['status']['message']);
+                }
+                elseif($client_message['status']['type'] == 'error'){
+                    toastr()->error($client_message['status']['message']);
+                }
+                elseif($client_message['status']['type'] == 'warning'){
+                    toastr()->warning($client_message['status']['message']);
+                }
+                elseif($client_message['status']['type'] == 'info'){
+                    toastr()->info($client_message['status']['message']);
+                }
+            }
 
-    // Success Response
-    public function success_response($resource_items, $total_items, $client_message, $has_pagination = true, $current_page = null, $take_count = null)
-    {
-        $message = trans('messages.successfully') . '...' . $client_message;
-        return $this->general_response($resource_items, $total_items, $message, $this->status_code_200, $has_pagination, $current_page, $take_count);
-    }
-
-    // Client Error Response
-    public function client_error_response($resource_items, $total_items, $client_message, $has_pagination = true, $current_page = null, $take_count = null)
-    {
-        $message = trans('messages.error!') . '...' . $client_message;
-        return $this->general_response($resource_items, $total_items, $message, $this->status_code_400, $has_pagination, $current_page, $take_count);
-    }
-
-    // Auth Error Response
-    public function auth_error_response($resource_items, $total_items, $client_message, $has_pagination = true, $current_page = null, $take_count = null)
-    {
-        $message = $client_message;
-        return $this->general_response($resource_items, $total_items, $message, $this->status_code_401, $has_pagination, $current_page, $take_count);
-    }
-
-    // Server Error Response
-    public function server_error_response($resource_items, $total_items, $has_pagination = true, $current_page = null, $take_count = null)
-    {
-        $message = trans('messages.server_error!');
-        return $this->general_response($resource_items, $total_items, $message, $this->status_code_500, $has_pagination, $current_page, $take_count);
+            // The Return
+            return $data;
+        }
     }
 }

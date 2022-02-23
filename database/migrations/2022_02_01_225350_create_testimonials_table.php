@@ -17,6 +17,9 @@ class CreateTestimonialsTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->string('name')->nullable();
+            $table->string('role')->nullable();
+            $table->text('details')->nullable();
 
             $table->boolean('is_active')->default(1);
             $table->integer('created_by')->unsigned();

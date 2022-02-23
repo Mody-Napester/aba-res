@@ -17,6 +17,17 @@ class CreateStudentsTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->string('first_name');
+            $table->string('last_name')->nullable();
+            $table->string('display_name');
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->text('info')->nullable();
+            $table->string('social_facebook_url')->nullable();
+            $table->string('social_twitter_url')->nullable();
+            $table->string('social_linkedin_url')->nullable();
+            $table->string('social_youtube_url')->nullable();
+
             $table->boolean('is_active')->default(1);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();

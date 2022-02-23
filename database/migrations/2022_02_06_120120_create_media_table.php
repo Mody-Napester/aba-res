@@ -17,6 +17,8 @@ class CreateMediaTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->integer('media_type_lookup_id')->nullable();
+            $table->string('file_name')->nullable();
 
             $table->boolean('is_active')->default(1);
             $table->integer('created_by')->unsigned();

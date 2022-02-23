@@ -18,14 +18,12 @@ class Instructor extends Model
      */
     protected $fillable = [
         'uuid',
-
         'name',
         'speciality',
         'phone',
         'email',
         'avatar',
         'details',
-
         'is_active',
         'created_by',
         'updated_by',
@@ -49,7 +47,6 @@ class Instructor extends Model
             $model->uuid = (string) \Webpatser\Uuid\Uuid::generate(config('vars.uuid_version'));
         });
     }
-
 
     /**
      *  Change Route Key Name

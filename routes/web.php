@@ -11,15 +11,18 @@ use \App\Http\Controllers\ScreenController;
 use \App\Http\Controllers\GroupController;
 use \App\Http\Controllers\UserController;
 use \App\Http\Controllers\LookupController;
-use \App\Http\Controllers\MediaController;
-use \App\Http\Controllers\InstructorController;
-use \App\Http\Controllers\CourseController;
-use \App\Http\Controllers\SessionController;
-use \App\Http\Controllers\LessonController;
-use \App\Http\Controllers\StudentController;
-use \App\Http\Controllers\BookController;
-use \App\Http\Controllers\SocialController;
-use \App\Http\Controllers\TestimonialController;
+use \App\Http\Controllers\Monolithic\MediaController;
+use \App\Http\Controllers\Monolithic\InstructorController;
+use \App\Http\Controllers\Monolithic\CourseController;
+use \App\Http\Controllers\Monolithic\SessionController;
+use \App\Http\Controllers\Monolithic\LessonController;
+use \App\Http\Controllers\Monolithic\StudentController;
+use \App\Http\Controllers\Monolithic\BookController;
+use \App\Http\Controllers\Monolithic\SocialController;
+use \App\Http\Controllers\Monolithic\TestimonialController;
+use \App\Http\Controllers\Monolithic\CurrencyController;
+use \App\Http\Controllers\Monolithic\OrderController;
+use \App\Http\Controllers\Monolithic\ConsultationController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
@@ -46,6 +49,7 @@ Route::group([
     Route::resource('group',GroupController::class);
     Route::resource('user',UserController::class);
 
+    Route::resource('currency',CurrencyController::class);
     Route::resource('media',MediaController::class);
     Route::resource('instructor',InstructorController::class);
     Route::resource('course',CourseController::class);
@@ -53,6 +57,13 @@ Route::group([
     Route::resource('lesson',LessonController::class);
     Route::resource('student',StudentController::class);
     Route::resource('book',BookController::class);
+
+    Route::resource('consultation',ConsultationController::class);
+    Route::resource('comment',ConsultationController::class);
+    Route::resource('setting',ConsultationController::class);
+
+    // orders
+    Route::resource('order',OrderController::class);
 
     Route::resource('social',SocialController::class);
     Route::resource('testimonial',TestimonialController::class);

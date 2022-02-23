@@ -29,4 +29,12 @@ return array (
   'Testimonials' => 'Testimonials',
   'Media_center' => 'Media center',
   'Sessions' => 'Sessions',
+  'Instructors' => 'Instructors',
+  'Currencies' => 'Currencies',
+  'Orders' => 'Orders',
+  'Comments' => 'Comments',
+  'Consultations' => 'Consultations',
+  'Settings' => 'Settings',
+  'e_commerce' => 'E-Commerce',
+  'configuration' => 'Configuration',
 );

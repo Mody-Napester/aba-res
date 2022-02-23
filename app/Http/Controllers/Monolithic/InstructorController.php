@@ -1,34 +1,54 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Monolithic;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Repositories\InstructorRepositoryController;
+use App\Http\Controllers\Repositories\MediaRepositoryController;
+use App\Http\Requests\InstructorRequest;
 use App\Models\Instructor;
 use Illuminate\Http\Request;
 
-class InstructorController extends Controller{
+class InstructorController extends Controller {
 
     public $repository;
+    public $media;
 
     /**
      * Display a listing of the resource.
      */
     public function __construct()
     {
-        $this->repository = new InstructorRepositoryController();
+        $this->repository = new InstructorRepositoryController('monolithic');
+        $this->media = new MediaRepositoryController('monolithic');
     }
 
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->repository->index();
-        if($data['status']['success'] == false && $data['status']['reason'] == 'permission_failed'){
-            toastr()->error($data['status']['message']);
-            return permission_redirect();
+        $return_data = $this->repository->index($request);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
         }else{
+            $data['resources'] = $return_data['data']['items'];
             return view('@dashboard.instructor.index', $data);
+        }
+    }
+
+    /**
+     * Create resource.
+     */
+    public function create(Request $request)
+    {
+        $return_data = $this->repository->create($request);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
+        }else{
+            $data['resource'] = $return_data['data']['items'];
+            $data['medias'] = $this->media->index(null)['data']['items'];
+            return view('@dashboard.instructor.create', $data);
         }
     }
 
@@ -37,78 +57,27 @@ class InstructorController extends Controller{
      */
     public function store(Request $request)
     {
-        if(!check_authority('add.instructor')){
-            toastr()->error(trans('messages.you_dont_have_permissions'));
-            return redirect('/');
-        }
-
-        // Check validation
-        $rules = [
-            'phone' => 'required',
-            'email' => 'required',
-            'avatar' => 'required',
-        ];
-
-        foreach (langs("short_name") as $lang) {
-            $rules['name_' . $lang] = 'required|string';
-            $rules['speciality_' . $lang] = 'required|string';
-            $rules['details_' . $lang] = 'required|string';
-        }
-
-        $request->validate($rules);
-
-        // Code
-        $name = [];
-        $speciality = [];
-        $details = [];
-
-        foreach (langs("short_name") as $lang) {
-            $name[$lang] = $request->input('name_' . $lang);
-            $speciality[$lang] = $request->input('speciality_' . $lang);
-            $details[$lang] = $request->input('details_' . $lang);
-        }
-
-        // Solve Arabic Problem
-        $name_json = str_replace(json_encode($name['ar']), '"'.$name['ar'].'"',json_encode($name));
-        $speciality_json = str_replace(json_encode($speciality['ar']), '"'.$speciality['ar'].'"',json_encode($speciality));
-        $details_json = str_replace(json_encode($details['ar']), '"'.$details['ar'].'"',json_encode($details));
-
-        $fields = [
-            'name' => ($request->has("name")) ? $name_json : '',
-            'speciality' => ($request->has("speciality")) ? $speciality_json : '',
-            'details' => ($request->has("details")) ? $details_json : '',
-            'phone' => ($request->has("phone")) ? $request->phone : '',
-            'email' => ($request->has("email")) ? $request->email : '',
-            'avatar' => ($request->has("avatar")) ? $request->avatar : '',
-            'is_active' => ($request->has("is_active") && $request->is_active == 1) ? 1 : 0,
-            'created_by' => auth()->user()->id,
-        ];
-
-        // Do Code
-        $resource = Instructor::store($fields);
-
-        // Return
-        if($resource){
-            toastr()->success(trans('messages.Created_successfully'));
-            return redirect(route('instructor.index'));
+        $return_data = $this->repository->store($request);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
         }else{
-            toastr()->error(trans('messages.Error_Please_try_again'));
-            return back();
+            return redirect(route('instructor.index'));
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($uuid)
+    public function edit(Request $request, $uuid)
     {
-        if(!check_authority('edit.instructor')){
-            toastr()->error(trans('messages.you_dont_have_permissions'));
-            return redirect('/');
+        $return_data = $this->repository->edit($request, $uuid);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
+        }else{
+            $data['resource'] = $return_data['data']['items'];
+            $data['medias'] = $this->media->index(null)['data']['items'];
+            return view('@dashboard.instructor.edit', $data);
         }
-
-        $data['resource'] = Instructor::getBy('uuid', $uuid);
-        return view('@dashboard.instructor.edit', $data);
     }
 
     /**
@@ -116,72 +85,24 @@ class InstructorController extends Controller{
      */
     public function update(Request $request, $uuid)
     {
-        if(!check_authority('edit.instructor')){
-            toastr()->error(trans('messages.you_dont_have_permissions'));
-            return redirect('/');
-        }
-
-        // Check Resource
-        $resource = Instructor::getBy('uuid', $uuid);
-        if(!$resource){
-            toastr()->error(trans('messages.Resource_not_found'));
-            return back();
-        }
-
-        // Check validation
-        $request->validate([
-            'name' => 'required|string',
-        ]);
-
-        // Check in name already taken
-        if(Instructor::where('name', $request->name)->where('id', "<>", $resource->id)->first()){
-            toastr()->error(trans('messages.already_exists'));
-            return back();
-        }
-
-        $fields = [
-            'name' => ($request->has("name")) ? $request->name : $resource->name,
-            'updated_by' => auth()->user()->id,
-        ];
-
-        $updatedResource = Instructor::edit($fields, $resource->id);
-
-        // Return
-        if($updatedResource){
-            toastr()->success(trans('messages.Updated_successfully'));
-            return redirect(route('instructor.index'));
+        $return_data = $this->repository->update($request, $uuid);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
         }else{
-            toastr()->error(trans('messages.Error_Please_try_again'));
-            return back();
+            return redirect(route('instructor.index'));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($uuid)
+    public function destroy(Request $request, $uuid)
     {
-        if(!check_authority('delete.instructor')){
-            toastr()->error(trans('messages.you_dont_have_permissions'));
-            return redirect('/');
-        }
-
-        $resource = Instructor::getBy('uuid', $uuid);
-
-        if($resource){
-            $deletedResource = Instructor::remove($resource->id);
-
-            // Return
-            if ($deletedResource){
-                toastr()->success(trans('messages.Deleted_successfully'));
-                return redirect(route('instructor.index'));
-            }else{
-                toastr()->error(trans('messages.Can_not_deleted'));
-                return back();
-            }
+        $return_data = $this->repository->destroy($request, $uuid);
+        if($return_data['status']['reason'] == 'permission_failed'){
+            return redirect_permission_fail();
         }else{
-            toastr()->error(trans('messages.Resource_not_found'));
-            return back();
+            return redirect(route('instructor.index'));
         }
     }
 }

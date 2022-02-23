@@ -1,10 +1,12 @@
 <?php
 
+// Old Json Trans
 function getFromJson($json , $lang){
     $data = json_decode($json, true);
     return (isset($data[$lang])) ? $data[$lang] : '';
 }
 
+//  Json Trans
 function getTrans($json, $lang)
 {
     if (!empty($json)) {
@@ -40,14 +42,14 @@ function check_authority($authority){
     return \App\Models\User::has_permission($authority);
 }
 
+// Default PERMISSION fail redirect
+function redirect_permission_fail(){
+    return redirect('/');
+}
+
 // Default language
 function lang(){
     return app()->getLocale();
-}
-
-// Permission Redirect;
-function permission_redirect(){
-    return redirect('/');
 }
 
 // System languages
@@ -63,6 +65,29 @@ function langs($get = null){
         }
     }
     return $get_array;
+}
+
+// get user id
+function getCurrentUserId(){
+    if(isset(request()->user)){
+        return auth()->user()->id;
+    }else{
+        return auth()->user()->id;
+    }
+}
+
+// Get lookup
+function setAttributesTrans($attributes = []){
+    $data = [];
+    foreach ($attributes as $attribute){
+        foreach (langs("short_name") as $lang) {
+            $data[$attribute][$lang] = request()->input($attribute . '_' . $lang);
+        }
+
+        // Solve Arabic Problem
+        $data[$attribute]['json'] = str_replace(json_encode(request()->input($attribute . '_ar')), '"'.request()->input($attribute . '_ar').'"',json_encode($data[$attribute]));
+    }
+    return $data;
 }
 
 // Get lookup
@@ -116,8 +141,11 @@ function upload_file($type, $file, $path){
     elseif ($type == "text") {
         $validExtensions = ['jpg','png','gif'];
     }
-    elseif ($type == "contract") {
-        $validExtensions = ['jpg','png','pdf'];
+    elseif ($type == "video") {
+        $validExtensions = ['mp4'];
+    }
+    elseif ($type == "book") {
+        $validExtensions = ['pdf'];
     }
 
     if (in_array($extension, $validExtensions)) {

@@ -17,6 +17,10 @@ class CreateSocialsTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->integer('provider_id')->nullable();
+            $table->string('url')->nullable();
+            $table->string('class')->nullable();
+            $table->string('color')->nullable();
 
             $table->boolean('is_active')->default(1);
             $table->integer('created_by')->unsigned();

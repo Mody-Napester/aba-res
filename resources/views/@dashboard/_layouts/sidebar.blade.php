@@ -65,17 +65,59 @@
     @if(check_authority('use.work_flow'))
         <li class="navigation-header text-truncate"><span data-i18n="Apps">{{ trans('sidebar.Work_Flow') }}</span></li>
 
+        <li class="nav-item">
+            <a href="#"><i class="bx bxs-edit-alt"></i><span class="menu-title text-truncate" data-i18n="Configuration">{{ trans('sidebar.configuration') }}</span></a>
+            <ul class="menu-content">
+
+                @if(check_authority('list.currency'))
+                    <li class="nav-item">
+                        <a class="d-flex align-items-center" href="{{ route('currency.index') }}"><i class="bx bx-money"></i><span class="menu-title text-truncate" data-i18n="Currencies">{{ trans('sidebar.Currencies') }}</span></a>
+                    </li>
+                @endif
+
+                @if(check_authority('list.social'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('social.index') }}"><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Socials">{{ trans('sidebar.Social_Accounts') }}</span></a>
+                </li>
+                @endif
+
+                @if(check_authority('list.testimonial'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('testimonial.index') }}"><i class="bx bx-chat"></i><span class="menu-title text-truncate" data-i18n="Testimonials">{{ trans('sidebar.Testimonials') }}</span></a>
+                </li>
+                @endif
+
+                @if(check_authority('list.setting'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('setting.index') }}"><i class="bx bx-edit-alt"></i><span class="menu-title text-truncate" data-i18n="Settings">{{ trans('sidebar.Settings') }}</span></a>
+                </li>
+                @endif
+
+                @if(check_authority('list.translations'))
+                    <li class="nav-item">
+                        <a class="d-flex align-items-center" href="{{ url('translations') }}"><i class="bx bxs-flag"></i><span class="menu-title text-truncate" data-i18n="Translation">{{ trans('sidebar.Translation') }}</span></a>
+                    </li>
+                @endif
+
+            </ul>
+        </li>
+
         @if(check_authority('list.media'))
             <li class="@if(Route::currentRouteName() == 'media.index') active @endif nav-item">
                 <a href="{{ route('media.index') }}"><i class="bx bxs-file-plus"></i><span class="menu-title text-truncate" data-i18n="Media">{{ trans('sidebar.Media_center') }}</span></a>
             </li>
         @endif
 
-        @if(check_authority('list.currency'))
-            <li class="nav-item">
-{{--                <a href="{{ route('currency.index') }}"><i class="bx bx-money"></i><span class="menu-title text-truncate" data-i18n="Currencies">{{ trans('sidebar.Currencies') }}</span></a>--}}
-                <a href=""><i class="bx bx-money"></i><span class="menu-title text-truncate" data-i18n="Currencies">{{ trans('sidebar.Currencies') }}</span></a>
-            </li>
+        @if(check_authority('list.consultation'))
+        <li class="@if(Route::currentRouteName() == 'consultation.index') active @endif nav-item">
+            <a href="{{ route('consultation.index') }}"><i class="bx bx-user-pin"></i><span class="menu-title text-truncate" data-i18n="Consultations">{{ trans('sidebar.Consultations') }}</span></a>
+        </li>
+        @endif
+
+        @if(check_authority('list.comment'))
+        <li class="@if(Route::currentRouteName() == 'comment.index') active @endif nav-item">
+            <a href="{{ route('comment.index') }}"><i class="bx bx-comment"></i><span class="menu-title text-truncate" data-i18n="Comments">{{ trans('sidebar.Comments') }}</span></a>
+        </li>
         @endif
 
         <li class="nav-item">
@@ -110,20 +152,23 @@
         </li>
 
         <li class="nav-item">
-            <a href="{{ route('book.index') }}"><i class="bx bx-book"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Books') }}</span></a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('social.index') }}"><i class="bx bxs-user-account"></i><span class="menu-title text-truncate" data-i18n="Socials">{{ trans('sidebar.Social_Accounts') }}</span></a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('testimonial.index') }}"><i class="bx bx-chat"></i><span class="menu-title text-truncate" data-i18n="Testimonials">{{ trans('sidebar.Testimonials') }}</span></a>
-        </li>
+            <a href="#"><i class="bx bx-shopping-bag"></i><span class="menu-title text-truncate" data-i18n="E-Commerce">{{ trans('sidebar.e_commerce') }}</span></a>
+            <ul class="menu-content">
 
-        @if(check_authority('list.translations'))
-        <li class="@if(Route::currentRouteName() == 'translations') active @endif nav-item">
-            <a href="{{ url('translations') }}"><i class="bx bxs-flag"></i><span class="menu-title text-truncate" data-i18n="Translation">{{ trans('sidebar.Translation') }}</span></a>
+                @if(check_authority('list.instructor'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('book.index') }}"><i class="bx bx-book"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Books') }}</span></a>
+                </li>
+                @endif
+
+                @if(check_authority('list.instructor'))
+                <li class="nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('order.index') }}"><i class="bx bx-cart"></i><span class="menu-title text-truncate" data-i18n="Books">{{ trans('sidebar.Orders') }}</span></a>
+                </li>
+                @endif
+
+            </ul>
         </li>
-        @endif
 
     @endif
 

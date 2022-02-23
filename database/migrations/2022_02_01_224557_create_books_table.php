@@ -17,6 +17,10 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->string('name');
+            $table->integer('media_image_id')->nullable();
+            $table->text('details')->nullable();
+
             $table->boolean('is_published')->default(1);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();

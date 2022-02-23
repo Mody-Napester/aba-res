@@ -17,6 +17,9 @@ class CreateLessonsTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->integer('session_id')->nullable();
+            $table->string('name');
+
             $table->boolean('is_published')->default(1);
             $table->integer('created_by')->unsigned();
             $table->integer('updated_by')->unsigned()->nullable();

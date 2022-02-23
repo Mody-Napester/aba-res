@@ -29,4 +29,12 @@ return array (
   'Testimonials' => 'الاراء',
   'Media_center' => 'الميديا',
   'Sessions' => 'الجلسات',
+  'Currencies' => 'العملات',
+  'Instructors' => 'المحاضرون',
+  'Orders' => 'الطلبات',
+  'Consultations' => 'الاستشارات',
+  'Comments' => 'التعليقات',
+  'Settings' => 'الاعدادات',
+  'e_commerce' => 'التجارة الالكترونية',
+  'configuration' => 'الضبط والتحكم',
 );

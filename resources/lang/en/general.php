@@ -13,4 +13,6 @@ return array (
   'search' => 'Search',
   'search_and_filter' => 'Search and filter',
   'reset' => 'Reset',
+  'enter' => 'Enter',
+  'list' => 'List',
 );

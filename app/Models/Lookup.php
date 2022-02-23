@@ -18,6 +18,10 @@ class Lookup extends Model
     protected $fillable = [
         'name',
         'parent_id',
+        'key',
+        'details',
+        'is_active',
+        'ordering',
         'created_by',
         'updated_by',
         'deleted_by',

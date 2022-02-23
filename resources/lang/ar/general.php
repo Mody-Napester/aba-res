@@ -13,4 +13,6 @@ return array (
   'choose' => 'اختر',
   'search' => 'بحث',
   'reset' => 'اعادة',
+  'enter' => 'ادخل',
+  'list' => 'قائمة العناصر',
 );

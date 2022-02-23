@@ -17,12 +17,14 @@ class CreateCoursesTable extends Migration
             $table->id();
             $table->uuid('uuid');
 
+            $table->integer('instructor_id')->nullable();
             $table->string('name');
-            $table->string('speciality')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->string('avatar')->nullable();
+            $table->text('short_details')->nullable();
             $table->text('details')->nullable();
+            $table->integer('media_banner_id')->nullable();
+            $table->integer('media_image_id')->nullable();
+            $table->float('price')->nullable();
+            $table->float('time_frame')->nullable();
 
             $table->boolean('is_published')->default(0);
             $table->integer('created_by')->unsigned();
