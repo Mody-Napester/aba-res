@@ -30,7 +30,13 @@ use \App\Http\Controllers\Monolithic\CommentController;
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
 
 // Public
-Route::get('/', [PublicController::class, 'index_home'])->name('register');
+Route::get('/', [PublicController::class, 'index_home'])->name('public.home.index');
+Route::get('/about-us', [PublicController::class, 'index_about'])->name('public.about.index');
+Route::get('/for-parents', [PublicController::class, 'index_for_parent'])->name('public.parent.index');
+Route::get('/for-professionals', [PublicController::class, 'index_for_professional'])->name('public.professional.index');
+Route::get('/for-organizations', [PublicController::class, 'index_for_organization'])->name('public.organization.index');
+Route::get('/resources', [PublicController::class, 'index_resource'])->name('public.resource.index');
+Route::get('/contact-us', [PublicController::class, 'index_contact'])->name('public.contact.index');
 
 // Auth
 Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
@@ -70,6 +76,4 @@ Route::group([
 
     // orders
     Route::resource('order',OrderController::class);
-
-
 });
