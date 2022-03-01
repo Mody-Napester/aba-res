@@ -22,7 +22,7 @@
 
                     <ul id="menu-primary-menu" class="navbar-nav ml-auto">
 
-                        <li class="menu-item nav-item"><a title="About Us" href="{{ route('public.home.index') }}" class="nav-link">Home</a></li>
+{{--                        <li class="menu-item nav-item"><a title="About Us" href="{{ route('public.home.index') }}" class="nav-link">Home</a></li>--}}
                         <li class="menu-item nav-item"><a title="About Us" href="{{ route('public.about.index') }}" class="nav-link">About Us</a></li>
                         <li class="menu-item nav-item"><a title="For Parents" href="{{ route('public.parent.index') }}" class="nav-link">For Parents</a></li>
                         <li class="menu-item nav-item"><a title="For Professional" href="{{ route('public.professional.index') }}" class="nav-link">For Professional</a></li>
@@ -39,13 +39,12 @@
                     <div class="others-option d-flex align-items-center">
                         <div class="option-item">
                             <div class="cart-btn">
-                                <a href=""><i class="flaticon-shopping-cart"></i><span class="mini-cart-count"></span></a>
+                                <a href="{{ route('public.cart.index') }}"><i class="flaticon-shopping-cart"></i><span class="mini-cart-count"></span></a>
                             </div>
                         </div>
 
                         <div class="option-item">
-                            <a href="" class="default-btn"><i class="flaticon-user"></i>Login/Register<span></span>
-                            </a>
+                            <a href="{{ route('public.auth.show') }}" class="default-btn"><i class="flaticon-user"></i>Login/Register<span></span></a>
                         </div>
                     </div>
                 </div>

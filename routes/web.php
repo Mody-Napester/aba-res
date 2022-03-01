@@ -30,6 +30,19 @@ use \App\Http\Controllers\Monolithic\CommentController;
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
 
 // Public
+Route::get('/auth', [PublicController::class, 'show_auth'])->name('public.auth.show');
+Route::get('/cart', [PublicController::class, 'index_cart'])->name('public.cart.index');
+
+Route::get('/course', [PublicController::class, 'index_course'])->name('public.course.index');
+Route::get('/course/{course}', [PublicController::class, 'show_course'])->name('public.course.show');
+
+Route::get('/book', [PublicController::class, 'index_book'])->name('public.book.index');
+Route::get('/book/{book}', [PublicController::class, 'show_book'])->name('public.book.show');
+
+Route::get('/consultation/for-parents', [PublicController::class, 'index_consultation_for_parent'])->name('public.consultation.parent.index');
+Route::get('/consultation/for-professionals', [PublicController::class, 'index_consultation_for_professional'])->name('public.consultation.professional.index');
+Route::get('/consultation/for-organizations', [PublicController::class, 'index_consultation_for_organization'])->name('public.consultation.organization.index');
+
 Route::get('/', [PublicController::class, 'index_home'])->name('public.home.index');
 Route::get('/about-us', [PublicController::class, 'index_about'])->name('public.about.index');
 Route::get('/for-parents', [PublicController::class, 'index_for_parent'])->name('public.parent.index');
@@ -39,11 +52,15 @@ Route::get('/resources', [PublicController::class, 'index_resource'])->name('pub
 Route::get('/contact-us', [PublicController::class, 'index_contact'])->name('public.contact.index');
 
 // Auth
-Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
-Route::get('/login', [AuthenticatedSessionController::class, 'create'])->middleware('guest')->name('login');
-Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
-Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
+Route::group([
+    'prefix' => 'dashboard'
+], function (){
+    Route::get('/register', [RegisteredUserController::class, 'create'])->middleware('guest')->name('register');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->middleware('guest');
+    Route::get('/login', [AuthenticatedSessionController::class, 'create'])->middleware('guest')->name('login');
+    Route::post('/login', [AuthenticatedSessionController::class, 'store'])->middleware('guest');
+    Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->middleware('auth')->name('logout');
+});
 
 // Dashboard
 Route::group([

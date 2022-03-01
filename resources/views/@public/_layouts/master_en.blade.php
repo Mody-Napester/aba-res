@@ -6,86 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home page - Aba Resources</title>
 
-    <link rel='stylesheet' id='gradebook-css'  href='assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/css/gradebookc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='course-review-css'  href='assets_public/wp-content/plugins/learnpress-course-review/assets/css/course-reviewc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='wp-block-library-css'  href='assets_public/wp-includes/css/dist/block-library/style.minc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='wc-blocks-vendors-style-css'  href='assets_public/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style5c45.css?ver=6.3.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='wc-blocks-style-css'  href='assets_public/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style5c45.css?ver=6.3.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='select2-css'  href='assets_public/wp-content/plugins/woocommerce/assets/css/select2af8e.css?ver=6.0.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='yith-wcaf-css'  href='assets_public/wp-content/plugins/yith-woocommerce-affiliates/assets/css/yith-wcafc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='contact-form-7-css'  href='assets_public/wp-content/plugins/contact-form-7/includes/css/styles5697.css?ver=5.5.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='font-awesome-4.7-css'  href='assets_public/wp-content/plugins/ecademy-toolkit/assets/css/font-awesome.minc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='fep-common-style-css'  href='assets_public/wp-content/plugins/front-end-pm/assets/css/common-style6974.css?ver=11.3.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='templately-editor-css'  href='assets_public/wp-content/plugins/templately/assets/css/editore7f0.css?ver=1.3.1' type='text/css' media='all' />
-    <link rel='stylesheet' id='woocommerce-layout-css'  href='assets_public/wp-content/plugins/woocommerce/assets/css/woocommerce-layoutaf8e.css?ver=6.0.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='woocommerce-smallscreen-css'  href='assets_public/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreenaf8e.css?ver=6.0.0' type='text/css' media='only screen and (max-width: 768px)' />
-    <link rel='stylesheet' id='woocommerce-general-css'  href='assets_public/wp-content/plugins/woocommerce/assets/css/woocommerceaf8e.css?ver=6.0.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='wpems-countdown-css-css'  href='assets_public/wp-content/plugins/wp-events-manager/inc/libraries/countdown/css/jquery.countdownc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='wpems-magnific-popup-css-css'  href='assets_public/wp-content/plugins/wp-events-manager/inc/libraries/magnific-popup/css/magnific-popupc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='ecademy-style-css'  href='assets_public/wp-content/themes/ecademy/stylec8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='vendor-css'  href='assets_public/wp-content/themes/ecademy/assets/css/vendor.min58f0.css?ver=1643571369' type='text/css' media='all' />
-    <link rel='stylesheet' id='ecademy-woocommerce-css'  href='assets_public/wp-content/themes/ecademy/assets/css/woocommercec8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='ecademy-main-style-css'  href='assets_public/wp-content/themes/ecademy/assets/css/style58f0.css?ver=1643571369' type='text/css' media='all' />
-    <link rel='stylesheet' id='ecademy-responsive-css'  href='assets_public/wp-content/themes/ecademy/assets/css/responsive58f0.css?ver=1643571369' type='text/css' media='all' />
-    <link rel='stylesheet' id='dashicons-css'  href='assets_public/wp-includes/css/dashicons.minc8d8.css?ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min05c8.css?ver=5.13.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-frontend-legacy-css'  href='assets_public/wp-content/plugins/elementor/assets/css/frontend-legacy.min1aae.css?ver=3.5.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-frontend-css'  href='assets_public/wp-content/plugins/elementor/assets/css/frontend.min1aae.css?ver=3.5.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-post-17-css'  href='assets_public/wp-content/uploads/elementor/css/post-all.css' type='text/css' media='all' />
-    <link rel='stylesheet' id='font-awesome-5-all-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.minbb93.css?ver=5.0.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='font-awesome-4-shim-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.minbb93.css?ver=5.0.0' type='text/css' media='all' />
-    <link rel='stylesheet' id='video-conferencing-with-zoom-api-css'  href='assets_public/wp-content/plugins/video-conferencing-with-zoom-api/assets/public/css/style.min3258.css?ver=3.8.16' type='text/css' media='all' />
-    <link rel='stylesheet' id='redux-google-fonts-ecademy_opt-css'  href='https://fonts.googleapis.com/css?family=cairo&amp;ver=1640708942' type='text/css' media='all' />
-    <link rel='stylesheet' id='learnpress-widgets-css'  href='assets_public/wp-content/plugins/learnpress/assets/css/widgets21c1.css?ver=4.1.4.1' type='text/css' media='all' />
-    <link rel='stylesheet' id='google-fonts-1-css'  href='https://fonts.googleapis.com/css?family=Inter%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&amp;display=auto&amp;ver=5.8.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-shared-0-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css?ver=5.15.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-fa-regular-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/regular.min52d5.css?ver=5.15.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-fa-solid-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css?ver=5.15.3' type='text/css' media='all' />
-    <link rel='stylesheet' id='elementor-icons-fa-brands-css'  href='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min52d5.css?ver=5.15.3' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/css/gradebookc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/learnpress-course-review/assets/css/course-reviewc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-includes/css/dist/block-library/style.minc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-vendors-style5c45.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/packages/woocommerce-blocks/build/wc-blocks-style5c45.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/assets/css/select2af8e.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/yith-woocommerce-affiliates/assets/css/yith-wcafc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/contact-form-7/includes/css/styles5697.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/assets/css/font-awesome.minc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/front-end-pm/assets/css/common-style6974.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/templately/assets/css/editore7f0.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/assets/css/woocommerce-layoutaf8e.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/assets/css/woocommerce-smallscreenaf8e.css') }}' type='text/css' media='only screen and (max-width: 768px)' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/woocommerce/assets/css/woocommerceaf8e.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/wp-events-manager/inc/libraries/countdown/css/jquery.countdownc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/wp-events-manager/inc/libraries/magnific-popup/css/magnific-popupc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/stylec8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/assets/css/vendor.min58f0.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/assets/css/woocommercec8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/assets/css/style58f0.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/assets/css/responsive58f0.css') }}' type='text/css' media='all' />
 
-    <link rel='stylesheet' href='assets_public/css/style_vendor.css' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/themes/ecademy/assets/css/style26a4.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/learnpress/assets/css/learnpress21c1.css') }}' type='text/css' media='all' />
 
-    <script type='text/javascript' src='assets_public/wp-includes/js/jquery/jquery.minaf6c.js?ver=3.6.0' id='jquery-core-js'></script>
-    <script type='text/javascript' src='assets_public/wp-includes/js/jquery/jquery-migrate.mind617.js?ver=3.3.2' id='jquery-migrate-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/table-jsc8d8.js?ver=5.8.3' id='table-js-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/gradebookc8d8.js?ver=5.8.3' id='gradebook-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/papaparse.minc8d8.js?ver=5.8.3' id='papaparse-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/frontend-gradebook-exportc8d8.js?ver=5.8.3' id='learn-press-gradebook-export-frontend-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/themes/ecademy/assets/js/vendor.min58f0.js?ver=1643571369' id='vendor-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/themes/ecademy/assets/js/jquery.smartify58f0.js?ver=1643571369' id='jquery-smartify-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/themes/ecademy/assets/js/ecademy-smartify58f0.js?ver=1643571369' id='ecademy-smartify-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/themes/ecademy/assets/js/cursor.min58f0.js?ver=1643571369' id='ecademy-cursor-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/themes/ecademy/assets/js/main58f0.js?ver=1643571369' id='ecademy-main-js'></script>
+    <link rel='stylesheet' href='{{ url('assets_public/wp-includes/css/dashicons.minc8d8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/eicons/css/elementor-icons.min05c8.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/css/frontend-legacy.min1aae.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/css/frontend.min1aae.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/uploads/elementor/css/post-all.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.minbb93.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/v4-shims.minbb93.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/video-conferencing-with-zoom-api/assets/public/css/style.min3258.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/learnpress/assets/css/widgets21c1.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min52d5.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/regular.min52d5.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min52d5.css') }}' type='text/css' media='all' />
+    <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/css/brands.min52d5.css') }}' type='text/css' media='all' />
+
+    <link rel='stylesheet' href='{{ url('assets_public/css/style_vendor.css') }}' type='text/css' media='all' />
+
+    <script type='text/javascript' src='{{ url('assets_public/wp-includes/js/jquery/jquery.minaf6c.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-includes/js/jquery/jquery-migrate.mind617.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/table-jsc8d8.js?') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/gradebookc8d8.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/papaparse.minc8d8.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/js/frontend-gradebook-exportc8d8.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/themes/ecademy/assets/js/vendor.min58f0.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/themes/ecademy/assets/js/jquery.smartify58f0.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/themes/ecademy/assets/js/ecademy-smartify58f0.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/themes/ecademy/assets/js/cursor.min58f0.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/themes/ecademy/assets/js/main58f0.js') }}'></script>
 
     <!-- End Google Analytics snippet added by Site Kit -->
-    <script type='text/javascript' src='assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.minbb93.js?ver=5.0.0' id='font-awesome-4-shim-js'></script>
-    <script type='text/javascript' src='assets_public/wp-content/plugins/ecademy-toolkit/inc/content-drip/assets/js/frontendc8d8.js?ver=5.8.3' id='lpcd-frontend-js'></script>
-    <script type='text/javascript' id='common-ajax-js-extra'>
-        /* <![CDATA[ */
-        var the_ajax_script = {"ajaxurl":"https:\/\/aba-resources.com\/wp-admin\/admin-ajax.php"};
-        /* ]]> */
-    </script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.minbb93.js') }}'></script>
+    <script type='text/javascript' src='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/content-drip/assets/js/frontendc8d8.js') }}'></script>
 
-    <script type='text/javascript' src='assets_public/wp-content/plugins/advance-bank-payment-transfer-gateway/includes/includes/js/commonc8d8.html?ver=5.8.3' id='common-ajax-js'></script>
-    <link rel="https://api.w.org/" href="assets_public/wp-json/index.html" /><link rel="alternate" type="application/json" href="assets_public/wp-json/wp/v2/pages/30.json" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="assets_public/xmlrpc0db0.php?rsd" />
-    <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="assets_public/wp-includes/wlwmanifest.xml" />
-    <meta name="generator" content="WordPress 5.8.3" />
-    <meta name="generator" content="WooCommerce 6.0.0" />
-    <link rel='shortlink' href='assets_public/index.html' />
-    <link rel="alternate" type="application/json+oembed" href="assets_public/wp-json/oembed/1.0/embed7c4b.json?url=https%3A%2F%2Faba-resources.com%2Fen%2Felearning-school%2F" />
-    <link rel="alternate" type="text/xml+oembed" href="assets_public/wp-json/oembed/1.0/embede236?url=https%3A%2F%2Faba-resources.com%2Fen%2Felearning-school%2F&amp;format=xml" />
+    <link rel="icon" href="{{ url('assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-32x32.png') }}" sizes="32x32" />
+    <link rel="icon" href="{{ url('assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-192x192.png') }}" sizes="192x192" />
+    <link rel="apple-touch-icon" href="{{ url('assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-180x180.png') }}" />
 
-    <script src="assets_public/../ajax.googleapis.com/ajax/libs/webfont/1/webfont.js"></script>
-    <script>
-        WebFont.load({google:{"families":["Cairo"],"subsets":""}})
-    </script>
-    <script type="text/javascript">
-        var ajaxurl = "assets_public/wp-admin/admin-ajax.html";
-    </script>
-
-    <link rel="icon" href="assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-32x32.png" sizes="32x32" />
-    <link rel="icon" href="assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-192x192.png" sizes="192x192" />
-    <link rel="apple-touch-icon" href="assets_public/wp-content/uploads/2021/11/cropped-BIG-LOGO-180x180.png" />
     <meta name="msapplication-TileImage" content="https://aba-resources.com/wp-content/uploads/2021/11/cropped-BIG-LOGO-270x270.png" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">

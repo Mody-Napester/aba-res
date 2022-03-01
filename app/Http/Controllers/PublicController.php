@@ -6,6 +6,51 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
+    // show_auth
+    public function show_auth(){
+        return view('@public.auth.show');
+    }
+
+    // index_cart
+    public function index_cart(){
+        return view('@public.cart.index');
+    }
+
+    // index_consultation_for_parent
+    public function index_consultation_for_parent(){
+        return view('@public.consultation.index_for_parent');
+    }
+
+    // index_consultation_for_professional
+    public function index_consultation_for_professional(){
+        return view('@public.consultation.index_for_professional');
+    }
+
+    // index_consultation_for_organization
+    public function index_consultation_for_organization(){
+        return view('@public.consultation.index_for_organization');
+    }
+
+    // index_course
+    public function index_course(){
+        return view('@public.course.index');
+    }
+
+    // show_course
+    public function show_course(){
+        return view('@public.course.show');
+    }
+
+    // index_book
+    public function index_book(){
+        return view('@public.course.book');
+    }
+
+    // show_book
+    public function show_book(){
+        return view('@public.book.show');
+    }
+
     // Home
     public function index_home(){
         return view('@public.home.index');
