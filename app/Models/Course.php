@@ -134,10 +134,44 @@ class Course extends Model
     }
 
     /**
+     *  Relationship with media_banner
+     */
+    public function media_banner()
+    {
+        return $this->belongsTo(Media::class, 'media_banner_id', 'id');
+    }
+
+
+    /**
+     *  Relationship with media_image
+     */
+    public function media_image()
+    {
+        return $this->belongsTo(Media::class, 'media_image_id', 'id');
+    }
+
+    /**
      *  Relationship with instructor
      */
     public function instructor()
     {
         return $this->belongsTo(Instructor::class, 'instructor_id', 'id');
+    }
+
+    /**
+     *  Relationship with sessions
+     */
+    public function sessions()
+    {
+        return $this->hasMany(Session::class);
+    }
+
+    /**
+     *  Relationship with students
+     */
+    public function students()
+    {
+        return $this->belongsToMany(Student::class, 'student_course', 'course_id', 'student_id')
+            ->withPivot(['enroll_date', 'is_activated', 'is_finished']);
     }
 }

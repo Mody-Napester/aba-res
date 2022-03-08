@@ -128,6 +128,14 @@ class Session extends Model
     }
 
     /**
+     *  Relationship with lessons
+     */
+    public function lessons()
+    {
+        return $this->hasMany(Lesson::class);
+    }
+
+    /**
      *  Relationship with courses
      */
     public function course()

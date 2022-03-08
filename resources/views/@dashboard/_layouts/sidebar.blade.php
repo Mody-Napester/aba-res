@@ -149,9 +149,24 @@
                         <a class="d-flex align-items-center" href="{{ route('lesson.index') }}"><i class="bx bx-task"></i><span class="menu-title text-truncate" data-i18n="Lessons">{{ trans('sidebar.Lessons') }}</span></a>
                     </li>
                 @endif
+                @if(check_authority('list.quiz'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('quiz.index') }}"><i class="bx bx-check-circle"></i><span class="menu-title text-truncate" data-i18n="Quiz">{{ trans('sidebar.Quiz') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.question'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('question.index') }}"><i class="bx bx-question-mark"></i><span class="menu-title text-truncate" data-i18n="Questions">{{ trans('sidebar.Questions') }}</span></a>
+                    </li>
+                @endif
                 @if(check_authority('list.student'))
                     <li>
                         <a class="d-flex align-items-center" href="{{ route('student.index') }}"><i class="bx bx-user-pin"></i><span class="menu-title text-truncate" data-i18n="Students">{{ trans('sidebar.Students') }}</span></a>
+                    </li>
+                @endif
+                @if(check_authority('list.certificate'))
+                    <li>
+                        <a class="d-flex align-items-center" href="{{ route('certificate.index') }}"><i class="bx bx-certification"></i><span class="menu-title text-truncate" data-i18n="Certificates">{{ trans('sidebar.Certificates') }}</span></a>
                     </li>
                 @endif
             </ul>

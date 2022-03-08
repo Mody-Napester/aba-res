@@ -31,33 +31,5 @@ class ConsultationController extends Controller {
             return view('@dashboard.consultation.index', $data);
         }
     }
-
-    /**
-     * Create resource.
-     */
-    public function create(Request $request)
-    {
-        $return_data = $this->repository->create($request);
-        if($return_data['status']['reason'] == 'permission_failed'){
-            return redirect_permission_fail();
-        }else{
-            $data['resource'] = $return_data['data']['items'];
-            return view('@dashboard.consultation.create', $data);
-        }
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        $return_data = $this->repository->store($request);
-        if($return_data['status']['reason'] == 'permission_failed'){
-            return redirect_permission_fail();
-        }else{
-            return redirect(route('consultation.index'));
-        }
-    }
-
 }
 

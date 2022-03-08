@@ -25,23 +25,34 @@ use \App\Http\Controllers\Monolithic\CurrencyController;
 use \App\Http\Controllers\Monolithic\OrderController;
 use \App\Http\Controllers\Monolithic\ConsultationController;
 use \App\Http\Controllers\Monolithic\CommentController;
+use \App\Http\Controllers\Monolithic\CertificateController;
+use \App\Http\Controllers\Monolithic\QuizController;
+use \App\Http\Controllers\Monolithic\QuestionController;
+use \App\Http\Controllers\Front\PublicAuthController;
+use \App\Http\Controllers\Front\PublicStudentController;
+use \App\Http\Controllers\Front\PublicCourseController;
+use \App\Http\Controllers\Front\PublicInstructorController;
+use \App\Http\Controllers\Front\PublicConsultationController;
 
 // Site Languages
 Route::get('language/{language}', [LanguagesController::class, 'setLanguage'])->name('language');
 
 // Public
-Route::get('/auth', [PublicController::class, 'show_auth'])->name('public.auth.show');
-Route::get('/cart', [PublicController::class, 'index_cart'])->name('public.cart.index');
+Route::get('public/auth', [PublicAuthController::class, 'auth'])->name('public.auth.show');
+Route::post('public/login', [PublicAuthController::class, 'login'])->name('public.front.login');
+Route::post('public/register', [PublicAuthController::class, 'register'])->name('public.front.register');
 
-Route::get('/course', [PublicController::class, 'index_course'])->name('public.course.index');
-Route::get('/course/{course}', [PublicController::class, 'show_course'])->name('public.course.show');
-
-Route::get('/book', [PublicController::class, 'index_book'])->name('public.book.index');
-Route::get('/book/{book}', [PublicController::class, 'show_book'])->name('public.book.show');
-
-Route::get('/consultation/for-parents', [PublicController::class, 'index_consultation_for_parent'])->name('public.consultation.parent.index');
-Route::get('/consultation/for-professionals', [PublicController::class, 'index_consultation_for_professional'])->name('public.consultation.professional.index');
-Route::get('/consultation/for-organizations', [PublicController::class, 'index_consultation_for_organization'])->name('public.consultation.organization.index');
+// Authed Front
+Route::group([
+    'middleware' => 'auth',
+    'prefix' => 'public'
+], function (){
+    Route::get('student/profile', [PublicStudentController::class, 'profile'])->name('public.student.profile');
+    Route::get('student/courses', [PublicStudentController::class, 'courses'])->name('public.student.courses');
+    Route::get('student/certificates', [PublicStudentController::class, 'certificates'])->name('public.student.certificates');
+    Route::get('student/quizzes', [PublicStudentController::class, 'quizzes'])->name('public.student.quizzes');
+    Route::get('student/orders', [PublicStudentController::class, 'orders'])->name('public.student.orders');
+});
 
 Route::get('/', [PublicController::class, 'index_home'])->name('public.home.index');
 Route::get('/about-us', [PublicController::class, 'index_about'])->name('public.about.index');
@@ -50,6 +61,19 @@ Route::get('/for-professionals', [PublicController::class, 'index_for_profession
 Route::get('/for-organizations', [PublicController::class, 'index_for_organization'])->name('public.organization.index');
 Route::get('/resources', [PublicController::class, 'index_resource'])->name('public.resource.index');
 Route::get('/contact-us', [PublicController::class, 'index_contact'])->name('public.contact.index');
+
+Route::get('/cart', [PublicController::class, 'index_cart'])->name('public.cart.index');
+
+Route::get('/course', [PublicCourseController::class, 'index'])->name('public.course.index');
+Route::get('/course/{course}', [PublicCourseController::class, 'show'])->name('public.course.show');
+
+Route::get('/instructor/{course}', [PublicInstructorController::class, 'show'])->name('public.instructor.show');
+
+Route::get('/book', [PublicController::class, 'index_book'])->name('public.book.index');
+Route::get('/book/{book}', [PublicController::class, 'show_book'])->name('public.book.show');
+
+Route::get('/consultation', [PublicConsultationController::class, 'create'])->name('public.consultation.create');
+Route::post('/consultation', [PublicConsultationController::class, 'store'])->name('public.consultation.store');
 
 // Auth
 Route::group([
@@ -87,6 +111,10 @@ Route::group([
     Route::resource('testimonial',TestimonialController::class);
 
     Route::resource('consultation',ConsultationController::class);
+
+    Route::resource('certificate',CertificateController::class);
+    Route::resource('quiz',QuizController::class);
+    Route::resource('question',QuestionController::class);
 
     Route::resource('comment',CommentController::class);
     Route::resource('setting',ConsultationController::class);

@@ -32,6 +32,7 @@ class CourseRepositoryController extends Controller
 
         // Get All Resource
         $data_request = $this->get_data(new Course(), $request, [
+            "is_published" => "=",
             "name" => "like",
         ]);
 

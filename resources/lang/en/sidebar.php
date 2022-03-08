@@ -38,4 +38,7 @@ return array (
   'e_commerce' => 'E-Commerce',
   'configuration' => 'Configuration',
   'Providers' => 'Providers',
+  'Certificates' => 'Certificates',
+  'Quiz' => 'Quiz',
+  'Questions' => 'Questions',
 );

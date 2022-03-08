@@ -6,10 +6,6 @@ use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
-    // show_auth
-    public function show_auth(){
-        return view('@public.auth.show');
-    }
 
     // index_cart
     public function index_cart(){

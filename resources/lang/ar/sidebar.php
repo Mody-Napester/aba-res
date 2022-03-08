@@ -38,4 +38,7 @@ return array (
   'e_commerce' => 'التجارة الالكترونية',
   'configuration' => 'الضبط والتحكم',
   'Providers' => 'مزودي النظام',
+  'Quiz' => 'الاختبارات',
+  'Certificates' => 'الشهادات',
+  'Questions' => 'الاسئلة',
 );

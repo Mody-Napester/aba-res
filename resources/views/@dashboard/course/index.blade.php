@@ -46,11 +46,11 @@
                                     <th>#</th>
                                     <th>{{ trans('general.control') }}</th>
                                     <th>{{ trans('course.instructor') }}</th>
-                                    <th>{{ trans('course.title') }}</th>
+                                    <th>{{ trans('course.name') }}</th>
                                     <th>{{ trans('course.short_details') }}</th>
                                     <th>{{ trans('course.details') }}</th>
-                                    <th>{{ trans('course.phone') }}</th>
-                                    <th>{{ trans('course.email') }}</th>
+                                    <th>{{ trans('course.price') }}</th>
+                                    <th>{{ trans('course.time_frame') }}</th>
                                     <th>{{ trans('course.media_banner') }}</th>
                                     <th>{{ trans('course.media_image') }}</th>
                                     <th>{{ trans('course.is_published') }}</th>
@@ -82,10 +82,21 @@
                                             <td>{{ getTrans($resource->name, lang()) }}</td>
                                             <td>{!! getTrans($resource->short_details, lang()) !!}</td>
                                             <td>{!! getTrans($resource->details, lang()) !!}</td>
-                                            <td>{{ $resource->phone }}</td>
-                                            <td>{{ $resource->email }}</td>
-                                            <td>{{ $resource->media_banner_id }}</td>
-                                            <td>{{ $resource->media_image_id }}</td>
+                                            <td>{{ $resource->price }}</td>
+                                            <td>{{ $resource->time_frame }}</td>
+
+                                            @if($resource->media_banner)
+                                                <img src="{{ url('assets_public/files/image') . '/' . $resource->media_banner->file_name }}" alt="image" class="img-thumbnail">
+                                            @else
+                                                -
+                                            @endif
+
+                                            @if($resource->media_image)
+                                                <img src="{{ url('assets_public/files/image') . '/' . $resource->media_banner->file_name }}" alt="image" class="img-thumbnail">
+                                            @else
+                                                -
+                                            @endif
+
                                             <td>
                                                 @if($resource->is_published == 1)
                                                     <span class="badge badge-light-success">Yes</span>

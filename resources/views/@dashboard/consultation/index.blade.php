@@ -49,8 +49,6 @@
                                     <th>{{ trans('consultation.degree') }}</th>
                                     <th>{{ trans('consultation.details') }}</th>
                                     <th>{{ trans('consultation.file') }}</th>
-                                    <th>{{ trans('general.created_by') }}</th>
-                                    <th>{{ trans('general.updated_by') }}</th>
                                     <th>{{ trans('general.created_at') }}</th>
                                 </tr>
                                 </thead>

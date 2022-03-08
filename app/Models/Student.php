@@ -31,6 +31,8 @@ class Student extends Model
         'social_youtube_url',
         'is_active',
 
+        'user_id',
+
         'created_by',
         'updated_by',
         'deleted_by',
@@ -133,5 +135,22 @@ class Student extends Model
     public function deletedBy()
     {
         return $this->belongsTo(User::class, 'deleted_by');
+    }
+
+    /**
+     *  Relationship with students
+     */
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'student_course', 'student_id', 'course_id')
+            ->withPivot(['enroll_date', 'is_activated', 'is_finished']);
+    }
+
+    /**
+     *  Relationship with user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

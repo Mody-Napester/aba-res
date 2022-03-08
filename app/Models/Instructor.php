@@ -128,4 +128,20 @@ class Instructor extends Model
     {
         return $this->belongsTo(User::class, 'deleted_by');
     }
+
+    /**
+     *  Relationship with media_avatar
+     */
+    public function media_avatar()
+    {
+        return $this->belongsTo(Media::class, 'avatar');
+    }
+
+    /**
+     *  Relationship with courses
+     */
+    public function courses()
+    {
+        return $this->hasMany(Course::class);
+    }
 }

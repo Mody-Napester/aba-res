@@ -81,7 +81,15 @@
                                             <td>{!! getTrans($resource->details, lang()) !!}</td>
                                             <td>{{ $resource->phone }}</td>
                                             <td>{{ $resource->email }}</td>
-                                            <td>{{ $resource->avatar }}</td>
+
+                                            <td>
+                                                @if($resource->media_avatar)
+                                                    <img src="{{ url('assets_public/files/image') . '/' . $resource->media_avatar->file_name }}" alt="image" class="img-thumbnail">
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
+
                                             <td>
                                                 @if($resource->is_active == 1)
                                                     <span class="badge badge-light-success">Yes</span>

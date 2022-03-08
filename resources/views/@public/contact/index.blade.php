@@ -8,7 +8,12 @@
         <div class="container">
             <div class="page-title-content">
                 <h2 >Contact</h2>
-                <p id="breadcrumbs"><span><span><a href="../elearning-school/index.html">Home</a> &raquo; <span class="breadcrumb_last" aria-current="page">Contact</span></span></span></p>                                    </div>
+
+                <p id="breadcrumbs">
+                    <a href="{{ route('public.home.index') }}">Home</a> &raquo;
+                    <span class="breadcrumb_last" aria-current="page">Contact</span>
+                </p>
+            </div>
         </div>
 
         <div class="shape9">

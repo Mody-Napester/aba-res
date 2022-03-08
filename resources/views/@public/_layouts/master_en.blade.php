@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home page - Aba Resources</title>
+    <title>@yield('title')</title>
 
     <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/ecademy-toolkit/inc/gradebook/assets/css/gradebookc8d8.css') }}' type='text/css' media='all' />
     <link rel='stylesheet' href='{{ url('assets_public/wp-content/plugins/learnpress-course-review/assets/css/course-reviewc8d8.css') }}' type='text/css' media='all' />

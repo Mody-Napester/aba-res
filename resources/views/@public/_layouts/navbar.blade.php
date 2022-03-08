@@ -43,9 +43,15 @@
                             </div>
                         </div>
 
-                        <div class="option-item">
-                            <a href="{{ route('public.auth.show') }}" class="default-btn"><i class="flaticon-user"></i>Login/Register<span></span></a>
-                        </div>
+                        @if(auth()->check())
+                            <div class="option-item">
+                                <a href="{{ route('public.student.profile') }}" class="default-btn"><i class="flaticon-user"></i>My Profile<span></span></a>
+                            </div>
+                        @else
+                            <div class="option-item">
+                                <a href="{{ route('public.auth.show') }}" class="default-btn"><i class="flaticon-user"></i>Login/Register<span></span></a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </nav>
